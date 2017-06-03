@@ -1,4 +1,4 @@
-package com.studylbn.www.cicleprogress;
+package com.example.circleprogress;
 
 import org.junit.Test;
 

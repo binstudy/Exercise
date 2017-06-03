@@ -1,4 +1,4 @@
-package com.studylbn.www.cicleprogress;
+package com.example.circleprogress;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("com.studylbn.www.cicleprogress.test", appContext.getPackageName());
+        assertEquals("com.example.circleprogress.test", appContext.getPackageName());
     }
 }

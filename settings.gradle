@@ -1,1 +1,1 @@
-include ':app', ':cicleprogress'
+include ':app', ':circleprogress'
