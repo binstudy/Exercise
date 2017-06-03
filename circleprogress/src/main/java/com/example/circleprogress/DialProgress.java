@@ -8,6 +8,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Point;
 import android.graphics.RectF;
+import android.graphics.SweepGradient;
 import android.graphics.Typeface;
 import android.text.TextPaint;
 import android.util.AttributeSet;
@@ -195,5 +196,13 @@ public class DialProgress extends View {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
         setMeasuredDimension(MiscUtil.measure(widthMeasureSpec, mDefaultSize),
                 MiscUtil.measure(heightMeasureSpec, mDefaultSize));
+    }
+
+    /**
+     * 更新圆弧画笔颜色
+     */
+    private void updateArcPaint() {
+        SweepGradient sweepGradient = new SweepGradient(mCenterPoint.x, mCenterPoint.y, mGradientColors, null);
+        mArcPaint.setShader(sweepGradient);
     }
 }
