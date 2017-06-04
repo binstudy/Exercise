@@ -4,7 +4,6 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Exercise.iml" filepath="$PROJECT_DIR$/Exercise.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/cicleprogress/cicleprogress.iml" filepath="$PROJECT_DIR$/cicleprogress/cicleprogress.iml" />
       <module fileurl="file://$PROJECT_DIR$/circleprogress/circleprogress.iml" filepath="$PROJECT_DIR$/circleprogress/circleprogress.iml" />
     </modules>
   </component>
