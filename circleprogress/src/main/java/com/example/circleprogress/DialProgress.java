@@ -4,6 +4,7 @@ import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
+import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Point;
@@ -92,6 +93,7 @@ public class DialProgress extends View {
         mRectF = new RectF();
         initConfig(context, attrs);
         initPaint();
+        setValue(mValue);
     }
 
     private void initConfig(Context context, AttributeSet attrs) {
@@ -192,10 +194,74 @@ public class DialProgress extends View {
     }
 
     @Override
+    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+        super.onSizeChanged(w, h, oldw, oldh);
+        int minSize = Math.min(w - getPaddingLeft() - getPaddingRight() - 2 * (int) mArcWidth,
+                h - getPaddingTop() - getPaddingBottom() - 2 * (int) mArcWidth);
+        mRadius = minSize / 2;
+        mCenterPoint.x = w / 2;
+        mCenterPoint.y = h / 2;
+
+        mRectF.left = mCenterPoint.x - mRadius - mArcWidth / 2;
+        mRectF.top = mCenterPoint.y - mRadius - mArcWidth / 2;
+        mRectF.right = mCenterPoint.x + mRadius + mArcWidth / 2;
+        mRectF.bottom = mCenterPoint.y + mRadius + mArcWidth / 2;
+
+        mValueOffset = mCenterPoint.y + getBaselineOffsetFromY(mValuePaint);
+        mHintOffset = mCenterPoint.y + getBaselineOffsetFromY(mHintPaint) - mRadius * mTextOffsetPercentInRadius;
+        mUnitOffset = mCenterPoint.y + getBaselineOffsetFromY(mUnitPaint) + mRadius * mTextOffsetPercentInRadius;
+
+        updateArcPaint();
+    }
+
+    @Override
+    protected void onDraw(Canvas canvas) {
+        super.onDraw(canvas);
+        drawArc(canvas);
+        drawDial(canvas);
+        drawText(canvas);
+    }
+
+    private void drawArc(Canvas canvas) {
+        float currentAngle = mPercent * mSweepAngle;
+        canvas.save();
+        canvas.rotate(mStartAngle, mCenterPoint.x, mCenterPoint.y);
+        canvas.drawArc(mRectF, currentAngle, mSweepAngle, false, mBgArcPaint);
+        canvas.drawArc(mRectF, 0, currentAngle, false, mArcPaint);
+        canvas.restore();
+    }
+
+    private void drawDial(Canvas canvas) {
+        int total = (int) (mSweepAngle / mDialIntervalDegree);
+        canvas.save();
+        canvas.rotate(mStartAngle, mCenterPoint.x, mCenterPoint.y);
+        for (int i = 0; i <= total; i++) {
+            canvas.drawLine(mCenterPoint.x + mRadius, mCenterPoint.y,
+                    mCenterPoint.x + mRadius + mArcWidth, mCenterPoint.y, mDialPaint);
+            canvas.rotate(mDialIntervalDegree, mCenterPoint.x, mCenterPoint.y);
+        }
+        canvas.restore();
+    }
+
+    private void drawText(Canvas canvas) {
+        canvas.drawText(String.format(mPrecisionFormat, mValue), mCenterPoint.x, mValueOffset, mValuePaint);
+        if (mUnit != null) {
+            canvas.drawText(mUnit.toString(), mCenterPoint.x, mUnitOffset, mUnitPaint);
+        }
+        if (mHint != null) {
+            canvas.drawText(mHint.toString(), mCenterPoint.x, mHintOffset, mHintPaint);
+        }
+    }
+
+    @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
         setMeasuredDimension(MiscUtil.measure(widthMeasureSpec, mDefaultSize),
                 MiscUtil.measure(heightMeasureSpec, mDefaultSize));
+    }
+
+    private float getBaselineOffsetFromY(Paint paint) {
+        return MiscUtil.measureTextHeight(paint) / 2;
     }
 
     /**
@@ -205,4 +271,55 @@ public class DialProgress extends View {
         SweepGradient sweepGradient = new SweepGradient(mCenterPoint.x, mCenterPoint.y, mGradientColors, null);
         mArcPaint.setShader(sweepGradient);
     }
+
+    public float getMaxValue() {
+        return mMaxValue;
+    }
+
+    public void setMaxValue(float maxValue) {
+        mMaxValue = maxValue;
+    }
+
+    /**
+     * 设置当前值
+     *
+     * @param value
+     */
+    public void setValue(float value) {
+        if (value > mMaxValue) {
+            value = mMaxValue;
+        }
+        float start = mPercent;
+        float end = value / mMaxValue;
+        startAnimator(start, end, mAnimTime);
+    }
+
+    private void startAnimator(float start, float end, long mAnimTime) {
+        mAnimator = ValueAnimator.ofFloat(start, end);
+        mAnimator.setDuration(mAnimTime);
+        mAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
+                mPercent = (float) animation.getAnimatedValue();
+                mValue = mPercent * mMaxValue;
+                invalidate();
+            }
+        });
+        mAnimator.start();
+    }
+
+    public int[] getGradientColors() {
+        return mGradientColors;
+    }
+
+    public void setGradientColors(int[] gradientColors) {
+        mGradientColors = gradientColors;
+        updateArcPaint();
+    }
+
+    public void reset() {
+        startAnimator(mPercent, 0.0f, 1000L);
+    }
+
+
 }
