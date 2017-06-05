@@ -101,7 +101,7 @@ public class DialProgress extends View {
         antiAlias = typedArray.getBoolean(R.styleable.DialProgress_antiAlias, Constant.ANTI_ALIAS);
         mMaxValue = typedArray.getFloat(R.styleable.DialProgress_maxValue, Constant.DEFAULT_MAX_VALUE);
         mValue = typedArray.getFloat(R.styleable.DialProgress_value, Constant.DEFAULT_VALUE);
-        mValueSize = typedArray.getFloat(R.styleable.DialProgress_valueSize, Constant.DEFAULT_VALUE_SIZE);
+        mValueSize = typedArray.getDimension(R.styleable.DialProgress_valueSize, Constant.DEFAULT_VALUE_SIZE);
         mValueColor = typedArray.getColor(R.styleable.DialProgress_valueColor, Color.BLACK);
         mDialIntervalDegree = typedArray.getInt(R.styleable.DialProgress_dialIntervalDegree, 10);
         int precision = typedArray.getInt(R.styleable.DialProgress_precision, 0);
@@ -226,7 +226,7 @@ public class DialProgress extends View {
         float currentAngle = mPercent * mSweepAngle;
         canvas.save();
         canvas.rotate(mStartAngle, mCenterPoint.x, mCenterPoint.y);
-        canvas.drawArc(mRectF, currentAngle, mSweepAngle, false, mBgArcPaint);
+        canvas.drawArc(mRectF, currentAngle, mSweepAngle - currentAngle, false, mBgArcPaint);
         canvas.drawArc(mRectF, 0, currentAngle, false, mArcPaint);
         canvas.restore();
     }
