@@ -147,7 +147,7 @@ public class DialProgress extends View {
                 e.printStackTrace();
             }
         }
-
+        typedArray.recycle();
     }
 
     private void initPaint() {
