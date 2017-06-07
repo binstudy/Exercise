@@ -1,1 +1,1 @@
-include ':app', ':circleprogress', ':testrecyclerview'
+include ':app', ':circleprogress', ':testrecyclerview', ':galleryrecyclerview'
