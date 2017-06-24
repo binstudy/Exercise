@@ -1,10 +1,12 @@
 package com.studylbn.www.pathtest;
 
+import android.animation.ValueAnimator;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
@@ -16,10 +18,42 @@ import android.view.View;
 public class PathTest extends View {
     private Paint mPaint;
     private int mWidth, mHeight;
+    private int currentAngle = 0;
+    private Handler handler;
 
     public PathTest(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         initPaint();
+//        setAngle();
+        handler = new Handler();
+        handler.postDelayed(runnable, 1);
+    }
+
+    Runnable runnable = new Runnable() {
+        @Override
+        public void run() {
+            currentAngle+=3;
+            invalidate();
+            handler.postDelayed(this, 1);
+        }
+    };
+
+    public void setAngle() {
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        ValueAnimator valueAnimator = ValueAnimator.ofInt(0, 360);
+        valueAnimator.setDuration(1000);
+        valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator valueAnimator) {
+                currentAngle = (int) valueAnimator.getAnimatedValue();
+                invalidate();
+            }
+        });
+        valueAnimator.start();
     }
 
     private void initPaint() {
@@ -34,7 +68,7 @@ public class PathTest extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         canvas.translate(mWidth / 2, mHeight / 2);
-        Path path = new Path();
+//        Path path = new Path();
 //        path.moveTo(100,100);
 //        path.lineTo(200, 200);
 //        path.setLastPoint(200,100);
@@ -48,6 +82,18 @@ public class PathTest extends View {
 //        path.addRect(-200, -200, 200, 200, Path.Direction.CW);
 //        path.addRect(-400, -400, 400, 400, Path.Direction.CCW);
 //        canvas.drawPath(path, mPaint);
+        drawPic(canvas);
+
+    }
+
+    /**
+     * 太极图
+     *
+     * @param canvas
+     */
+    private void drawPic(Canvas canvas) {
+        canvas.save();
+        canvas.rotate(currentAngle);
 
         canvas.drawColor(Color.BLUE);
         Path path1 = new Path();
@@ -86,6 +132,7 @@ public class PathTest extends View {
         canvas.drawPath(path11, mPaint);
         mPaint.setColor(Color.BLACK);
         canvas.drawPath(path5, mPaint);
+        canvas.restore();
     }
 
     @Override
