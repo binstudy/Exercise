@@ -34,7 +34,7 @@ public class PathTest extends View {
         public void run() {
             currentAngle+=3;
             invalidate();
-            handler.postDelayed(this, 1);
+            handler.postDelayed(this, 5);
         }
     };
 
