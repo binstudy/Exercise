@@ -6,6 +6,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
+import android.graphics.RectF;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
@@ -32,7 +33,7 @@ public class PathTest extends View {
     Runnable runnable = new Runnable() {
         @Override
         public void run() {
-            currentAngle+=3;
+            currentAngle += 3;
             invalidate();
             handler.postDelayed(this, 5);
         }
@@ -59,7 +60,7 @@ public class PathTest extends View {
     private void initPaint() {
         mPaint = new Paint();
         mPaint.setColor(Color.BLACK);
-        mPaint.setStyle(Paint.Style.FILL);
+        mPaint.setStyle(Paint.Style.STROKE);
         mPaint.setAntiAlias(true);
         mPaint.setStrokeWidth(10);
     }
@@ -82,8 +83,32 @@ public class PathTest extends View {
 //        path.addRect(-200, -200, 200, 200, Path.Direction.CW);
 //        path.addRect(-400, -400, 400, 400, Path.Direction.CCW);
 //        canvas.drawPath(path, mPaint);
-        drawPic(canvas);
 
+//        drawPic(canvas); //太极图
+//        drawPath(canvas);
+        drawPath1(canvas);
+    }
+
+    private void drawPath1(Canvas canvas) {
+        canvas.scale(1, -1);
+        Path path = new Path();
+        path.lineTo(100, 100);
+        RectF rf = new RectF(0, 0, 300, 300);
+        path.arcTo(rf, 0, 270,true);
+        canvas.drawPath(path, mPaint);
+    }
+
+    private void drawPath(Canvas canvas) {
+
+        canvas.scale(0.5f, -1);
+        Path path = new Path();
+        Path src = new Path();
+
+        path.addRect(-200, -200, 200, 200, Path.Direction.CW);
+        src.addCircle(0, 0, 100, Path.Direction.CW);
+
+        path.addPath(src, 0, 200);
+        canvas.drawPath(path, mPaint);
     }
 
     /**
