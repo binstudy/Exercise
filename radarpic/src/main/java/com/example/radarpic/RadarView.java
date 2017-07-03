@@ -146,4 +146,23 @@ public class RadarView extends View {
         }
         canvas.drawPath(path, mainPaint);
     }
+
+    /**
+     * 绘制文字
+     *
+     * @param canvas
+     */
+    private void drawText(Canvas canvas) {
+        Paint.FontMetrics fontMetrics = textPaint.getFontMetrics();
+        float fontHeight = fontMetrics.descent - fontMetrics.ascent;
+        for (int i = 0; i < count; i++) {
+            float x = (float) (centerX + (radius + fontHeight / 2) * Math.cos(angle * i));
+            float y = (float) (centerY + (radius + fontHeight / 2) * Math.sin(angle * i));
+            if (angle * i >= 0 && angle * i <= Math.PI / 2) {
+
+            } else if (angle * i >= Math.PI && angle * i <= 3 * Math.PI / 2) {
+
+            }
+        }
+    }
 }
