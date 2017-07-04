@@ -77,6 +77,7 @@ public class RadarView extends View {
         drawPolygon(canvas);
         drawLines(canvas);
         drawRegion(canvas);
+        drawText(canvas);
     }
 
     /**
@@ -86,6 +87,7 @@ public class RadarView extends View {
      */
     private void drawRegion(Canvas canvas) {
         Path path = new Path();
+        valuePaint.setAlpha(255);
         for (int i = 0; i < count; i++) {
             double percent = data[i] / maxValue;
             float x = (float) (centerX + radius * Math.cos(angle * i) * percent);
@@ -98,7 +100,6 @@ public class RadarView extends View {
             canvas.drawCircle(x, y, 10, valuePaint);
         }
         path.close();
-        valuePaint.setAlpha(255);
         valuePaint.setStyle(Paint.Style.STROKE);
         canvas.drawPath(path, valuePaint);
         valuePaint.setAlpha(127);
@@ -156,13 +157,33 @@ public class RadarView extends View {
         Paint.FontMetrics fontMetrics = textPaint.getFontMetrics();
         float fontHeight = fontMetrics.descent - fontMetrics.ascent;
         for (int i = 0; i < count; i++) {
-            float x = (float) (centerX + (radius + fontHeight / 2) * Math.cos(angle * i));
-            float y = (float) (centerY + (radius + fontHeight / 2) * Math.sin(angle * i));
-            if (angle * i >= 0 && angle * i <= Math.PI / 2) {
+            float x, y;
+            if (i == 0 || i == titles.length - 1 || i == titles.length - 2) {
+                x = (float) (centerX + (radius + fontHeight / 2) * Math.cos(angle * i));
+                y = (float) (centerY + (radius + fontHeight / 2) * Math.sin(angle * i));
 
-            } else if (angle * i >= Math.PI && angle * i <= 3 * Math.PI / 2) {
-
+            } else {
+                x = (float) (centerX + (radius + fontHeight) * Math.cos(angle * i));
+                y = (float) (centerY + (radius + fontHeight) * Math.sin(angle * i));
             }
+            canvas.drawText(titles[i], x, y, textPaint);
         }
+
+        //下面是Demo的方法
+//        for (int i = 0; i < count; i++) {
+//            float x = (float) (centerX + (radius + fontHeight / 2) * Math.cos(angle * i));
+//            float y = (float) (centerY + (radius + fontHeight / 2) * Math.sin(angle * i));
+//            if (angle * i >= 0 && angle * i <= Math.PI / 2) {//第4象限
+//                canvas.drawText(titles[i], x, y, textPaint);
+//            } else if (angle * i >= 3 * Math.PI / 2 && angle * i <= Math.PI * 2) {//第1象限
+//                canvas.drawText(titles[i], x, y, textPaint);
+//            } else if (angle * i > Math.PI / 2 && angle * i <= Math.PI) {//第2象限
+//                float dis = textPaint.measureText(titles[i]);//文本长度
+//                canvas.drawText(titles[i], x - dis, y, textPaint);
+//            } else if (angle * i >= Math.PI && angle * i < 3 * Math.PI / 2) {//第3象限
+//                float dis = textPaint.measureText(titles[i]);//文本长度
+//                canvas.drawText(titles[i], x - dis, y, textPaint);
+//            }
+//        }
     }
 }
