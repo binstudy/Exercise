@@ -6,7 +6,32 @@
     android:layout_height="match_parent">
 
     <com.example.bezierview.BezierView
+        android:id="@+id/bv"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
+    <RadioGroup
+        android:id="@+id/rg_select"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center_vertical"
+        android:layout_alignParentBottom="true"
+        android:checkedButton="@+id/rb_left"
+        android:orientation="horizontal"
+        android:paddingLeft="10dp">
+
+        <RadioButton
+            android:id="@+id/rb_left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="左控制点" />
+
+        <RadioButton
+            android:id="@+id/rb_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:text="右控制点" />
+
+    </RadioGroup>
 </RelativeLayout>

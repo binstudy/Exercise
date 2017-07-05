@@ -12,15 +12,25 @@ import android.view.View;
 
 /**
  * Created by LiuBin on 2017/7/4 13:31.
+ * 三阶贝赛尔曲线
  */
 
 public class BezierView extends View {
     private Paint mPaint;
     private int centerX, centerY;
-    private Point start, end, control;
+    private Point start, end, control1, control2;
+    private boolean mode = true;
 
     public BezierView(Context context) {
         this(context, null);
+    }
+
+    public boolean isMode() {
+        return mode;
+    }
+
+    public void setMode(boolean mode) {
+        this.mode = mode;
     }
 
     public BezierView(Context context, AttributeSet attrs) {
@@ -32,7 +42,8 @@ public class BezierView extends View {
 
         start = new Point(0, 0);
         end = new Point(0, 0);
-        control = new Point(0, 0);
+        control1 = new Point(0, 0);
+        control2 = new Point(0, 0);
     }
 
     @Override
@@ -44,14 +55,21 @@ public class BezierView extends View {
         start.y = centerY;
         end.x = centerX + 200;
         end.y = centerY;
-        control.x = centerX;
-        control.y = centerY -200;
+        control1.x = centerX - 100;
+        control1.y = centerY - 200;
+        control2.x = centerX + 100;
+        control2.y = centerY - 200;
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        control.x = (int) event.getX();
-        control.y = (int) event.getY();
+        if (isMode()) {
+            control1.x = (int) event.getX();
+            control1.y = (int) event.getY();
+        } else {
+            control2.x = (int) event.getX();
+            control2.y = (int) event.getY();
+        }
         invalidate();
         return true;
     }
@@ -63,14 +81,16 @@ public class BezierView extends View {
         //画点
         mPaint.setColor(Color.GRAY);
         mPaint.setStrokeWidth(20);
-        canvas.drawPoint(control.x, control.y, mPaint);
+        canvas.drawPoint(control1.x, control1.y, mPaint);
+        canvas.drawPoint(control2.x, control2.y, mPaint);
         canvas.drawPoint(start.x, start.y, mPaint);
         canvas.drawPoint(end.x, end.y, mPaint);
 
         //画辅助线
         mPaint.setStrokeWidth(4);
-        canvas.drawLine(start.x, start.y, control.x, control.y, mPaint);
-        canvas.drawLine(end.x, end.y, control.x, control.y, mPaint);
+        canvas.drawLine(start.x, start.y, control1.x, control1.y, mPaint);
+        canvas.drawLine(control1.x, control1.y, control2.x, control2.y, mPaint);
+        canvas.drawLine(control2.x, control2.y, end.x, end.y, mPaint);
 
         //画bezier曲线
         mPaint.setColor(Color.RED);
@@ -78,7 +98,8 @@ public class BezierView extends View {
         mPaint.setStrokeCap(Paint.Cap.ROUND);
         Path path = new Path();
         path.moveTo(start.x, start.y);
-        path.quadTo(control.x, control.y, end.x, end.y);
+//        path.quadTo(control1.x, control1.y, end.x, end.y);
+        path.cubicTo(control1.x, control1.y, control2.x, control2.y, end.x, end.y);
         canvas.drawPath(path, mPaint);
     }
 }
