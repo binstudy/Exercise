@@ -60,7 +60,7 @@ public class PathTest extends View {
     private void initPaint() {
         mPaint = new Paint();
         mPaint.setColor(Color.BLACK);
-        mPaint.setStyle(Paint.Style.STROKE);
+        mPaint.setStyle(Paint.Style.FILL);
         mPaint.setAntiAlias(true);
         mPaint.setStrokeWidth(10);
     }
@@ -84,9 +84,9 @@ public class PathTest extends View {
 //        path.addRect(-400, -400, 400, 400, Path.Direction.CCW);
 //        canvas.drawPath(path, mPaint);
 
-//        drawPic(canvas); //太极图
+        drawPic(canvas); //太极图
 //        drawPath(canvas);
-        drawPath1(canvas);
+//        drawPath1(canvas);
     }
 
     private void drawPath1(Canvas canvas) {

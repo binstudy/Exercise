@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.PathMeasure;
+import android.graphics.RectF;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
@@ -46,8 +47,38 @@ public class MeasureView extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         canvas.translate(mViewWidth / 2, mViewHeight / 2);
-        drawCoordinate(canvas);
-        drawPathMeasure(canvas);
+        drawCoordinate(canvas); //坐标
+//        drawPathMeasure(canvas);
+//        drawPathMeasure2(canvas);
+        drawPathMeasure3(canvas);
+    }
+
+    private void drawPathMeasure3(Canvas canvas) {
+        Path path1 = new Path();
+        Path path2 = new Path();
+        RectF r1 = new RectF(-100, -100, 100, 100);
+        RectF r2 = new RectF(-200, -200, 200, 200);
+        path1.addRect(r1, Path.Direction.CW);
+        path2.addRect(r2, Path.Direction.CW);
+        path1.addPath(path2);
+        canvas.drawPath(path1, mPaintBlack);
+
+        PathMeasure pm = new PathMeasure(path1, false);
+        Log.e("length1", pm.getLength() + "");
+        pm.nextContour();
+        Log.e("length2", pm.getLength() + "");
+    }
+
+    private void drawPathMeasure2(Canvas canvas) {
+        Path path = new Path();
+        RectF rectF = new RectF(-200, -200, 200, 200);
+        path.addRect(rectF, Path.Direction.CW);
+        Path dst = new Path();
+        dst.moveTo(-300, -300);
+        dst.lineTo(0, 0);
+        PathMeasure pm = new PathMeasure(path, false);
+        pm.getSegment(200, 600, dst, false);
+        canvas.drawPath(dst, mPaintBlack);
     }
 
     private void drawPathMeasure(Canvas canvas) {
