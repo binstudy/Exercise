@@ -86,7 +86,11 @@ public class MeasureView extends View {
         pm.getPosTan(pm.getLength() * currentValue, pos, tan);
         mMatrix.reset();
         float degrees = (float) (Math.atan2(tan[1], tan[0]) * 180 / Math.PI);
-
+        mMatrix.postRotate(degrees, mBitmap.getWidth() / 2, mBitmap.getHeight() / 2);
+        mMatrix.postTranslate(pos[0], pos[1]);
+        canvas.drawPath(path, mPaintBlack);
+        canvas.drawBitmap(mBitmap, mMatrix, mPaint);
+        invalidate();
     }
 
     private void drawPathMeasure3(Canvas canvas) {
