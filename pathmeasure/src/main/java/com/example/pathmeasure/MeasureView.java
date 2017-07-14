@@ -1,8 +1,11 @@
 package com.example.pathmeasure;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.PathMeasure;
@@ -19,6 +22,12 @@ public class MeasureView extends View {
     private int mViewWidth, mViewHeight;
     private Paint mPaint, mPaintBlack;
 
+    private float currentValue = 0;
+    private float[] pos;
+    private float[] tan;
+    private Bitmap mBitmap;
+    private Matrix mMatrix;
+
     public MeasureView(Context context) {
         this(context, null);
     }
@@ -34,6 +43,17 @@ public class MeasureView extends View {
         mPaintBlack.setColor(Color.BLACK);
         mPaintBlack.setStrokeWidth(4);
         mPaintBlack.setStyle(Paint.Style.STROKE);
+
+        init(context);
+    }
+
+    private void init(Context context) {
+        mMatrix = new Matrix();
+        pos = new float[2];
+        tan = new float[2];
+        BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inSampleSize = 2;
+        mBitmap = BitmapFactory.decodeResource(context.getResources(), R.mipmap.jiantou, options);
     }
 
     @Override
@@ -50,7 +70,23 @@ public class MeasureView extends View {
         drawCoordinate(canvas); //坐标
 //        drawPathMeasure(canvas);
 //        drawPathMeasure2(canvas);
-        drawPathMeasure3(canvas);
+//        drawPathMeasure3(canvas);
+        drawPathMeasure4(canvas);
+    }
+
+
+    private void drawPathMeasure4(Canvas canvas) {
+        Path path = new Path();
+        path.addCircle(0, 0, 200, Path.Direction.CW);
+        PathMeasure pm = new PathMeasure(path, false);
+        currentValue += 0.005;
+        if (currentValue >= 1) {
+            currentValue = 0;
+        }
+        pm.getPosTan(pm.getLength() * currentValue, pos, tan);
+        mMatrix.reset();
+        float degrees = (float) (Math.atan2(tan[1], tan[0]) * 180 / Math.PI);
+
     }
 
     private void drawPathMeasure3(Canvas canvas) {
