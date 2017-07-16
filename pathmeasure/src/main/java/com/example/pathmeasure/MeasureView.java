@@ -52,7 +52,7 @@ public class MeasureView extends View {
         pos = new float[2];
         tan = new float[2];
         BitmapFactory.Options options = new BitmapFactory.Options();
-        options.inSampleSize = 2;
+        options.inSampleSize = 4;
         mBitmap = BitmapFactory.decodeResource(context.getResources(), R.mipmap.jiantou, options);
     }
 
@@ -87,7 +87,7 @@ public class MeasureView extends View {
         mMatrix.reset();
         float degrees = (float) (Math.atan2(tan[1], tan[0]) * 180 / Math.PI);
         mMatrix.postRotate(degrees, mBitmap.getWidth() / 2, mBitmap.getHeight() / 2);
-        mMatrix.postTranslate(pos[0], pos[1]);
+        mMatrix.postTranslate(pos[0] - mBitmap.getWidth() / 2, pos[1] - mBitmap.getHeight() / 2);
         canvas.drawPath(path, mPaintBlack);
         canvas.drawBitmap(mBitmap, mMatrix, mPaint);
         invalidate();
