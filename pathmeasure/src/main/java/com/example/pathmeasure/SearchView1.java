@@ -12,126 +12,93 @@ import android.graphics.RectF;
 import android.os.Handler;
 import android.os.Message;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
 
 /**
- * Created by LiuBin on 2017/7/19 16:45.
+ * Created by LiuBin on 2017/7/20 11:49.
  */
 
-/**
- * Author: GcsSloop
- * Created Date: 16/5/31
- * Copyright (C) 2016 GcsSloop.
- * GitHub: https://github.com/GcsSloop
- */
-public class SearchView extends View {
-
-    // 画笔
+public class SearchView1 extends View {
     private Paint mPaint;
-
-    // View 宽高
-    private int mViewWidth;
-    private int mViewHeight;
-
-    // 当前的状态(非常重要)
+    private int mViewWidth, mViewHight;
     private State mCurrentState = State.NONE;
-
-    // 放大镜与外部圆环
-    private Path path_srarch;
-    private Path path_circle;
-
-    // 测量Path 并截取部分的工具
+    private Path path_Circle;
+    private Path path_Search;
     private PathMeasure mMeasure;
-
-    // 默认的动效周期 2s
     private int defaultDuration = 2000;
-
-    // 控制各个过程的动画
     private ValueAnimator mStartingAnimator;
     private ValueAnimator mSearchingAnimator;
     private ValueAnimator mEndingAnimator;
 
-    // 动画数值(用于控制动画状态,因为同一时间内只允许有一种状态出现,具体数值处理取决于当前状态)
     private float mAnimatorValue = 0;
-
-    // 动效过程监听器
-    private ValueAnimator.AnimatorUpdateListener mUpdateListener;
+    private ValueAnimator.AnimatorUpdateListener mUpdataListener;
     private Animator.AnimatorListener mAnimatorListener;
 
-    // 用于控制动画状态转换
     private Handler mAnimatorHandler;
-
-    // 判断是否已经搜索结束
     private boolean isOver = false;
 
     private int count = 0;
 
-    // 这个视图拥有的状态
-    public static enum State {
-        NONE,
-        STARTING,
-        SEARCHING,
-        ENDING
+    static enum State {
+        NONE, STARTING, SEARCHING, ENDING
     }
 
-    public SearchView(Context context) {
+    public SearchView1(Context context) {
         this(context, null);
     }
 
-    public SearchView(Context context, AttributeSet attrs) {
+    public SearchView1(Context context, AttributeSet attrs) {
         super(context, attrs);
         init();
     }
 
-    public void init() {
-
+    private void init() {
         initPaint();
         initPath();
         initListener();
         initHandler();
         initAnimator();
 
-        // 进入开始动画
         mCurrentState = State.STARTING;
         mStartingAnimator.start();
+    }
 
+    @Override
+    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+        super.onSizeChanged(w, h, oldw, oldh);
+        mViewWidth = w;
+        mViewHight = h;
     }
 
     private void initPaint() {
         mPaint = new Paint();
-        mPaint.setStyle(Paint.Style.STROKE);
-        mPaint.setColor(Color.WHITE);
         mPaint.setStrokeWidth(15);
         mPaint.setStrokeCap(Paint.Cap.ROUND);
         mPaint.setAntiAlias(true);
+        mPaint.setStyle(Paint.Style.STROKE);
+        mPaint.setColor(Color.WHITE);
     }
 
     private void initPath() {
-        path_srarch = new Path();
-        path_circle = new Path();
-
         mMeasure = new PathMeasure();
-
-        // 注意,不要到360度,否则内部会自动优化,测量不能取到需要的数值
-        RectF oval1 = new RectF(-50, -50, 50, 50);          // 放大镜圆环
-        path_srarch.addArc(oval1, 45, 359.9f);
-
-        RectF oval2 = new RectF(-100, -100, 100, 100);      // 外部圆环
-        path_circle.addArc(oval2, 45, -359.9f);
-
         float[] pos = new float[2];
 
-        mMeasure.setPath(path_circle, false);               // 放大镜把手的位置
+        path_Circle = new Path();
+        RectF oval1 = new RectF(-100, -100, 100, 100);
+        path_Circle.addArc(oval1, 45, -359.9f);
+
+        path_Search = new Path();
+        RectF oval2 = new RectF(-50, -50, 50, 50);
+        path_Search.addArc(oval1, 45, 359.9f);
+
+        mMeasure.setPath(path_Circle, false);
         mMeasure.getPosTan(0, pos, null);
 
-        path_srarch.lineTo(pos[0], pos[1]);                 // 放大镜把手
-
-        Log.i("TAG", "pos=" + pos[0] + ":" + pos[1]);
+        path_Search.lineTo(pos[0], pos[1]);
     }
 
     private void initListener() {
-        mUpdateListener = new ValueAnimator.AnimatorUpdateListener() {
+        mUpdataListener = new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
                 mAnimatorValue = (float) animation.getAnimatedValue();
@@ -147,7 +114,6 @@ public class SearchView extends View {
 
             @Override
             public void onAnimationEnd(Animator animation) {
-                // getHandle发消息通知动画状态更新
                 mAnimatorHandler.sendEmptyMessage(0);
             }
 
@@ -170,28 +136,27 @@ public class SearchView extends View {
                 super.handleMessage(msg);
                 switch (mCurrentState) {
                     case STARTING:
-                        // 从开始动画转换到搜索动画
+                        //从开始动画转换到搜索动画
                         isOver = false;
                         mCurrentState = State.SEARCHING;
                         mStartingAnimator.removeAllListeners();
                         mSearchingAnimator.start();
                         break;
                     case SEARCHING:
-                        if (!isOver) {  // 如果搜索未结束 则继续执行搜索动画
+                        if (!isOver) {
                             mSearchingAnimator.start();
-                            Log.e("Update", "RESTART");
-
                             count++;
-                            if (count > 2) {       // count大于2则进入结束状态
+
+                            if (count > 2) {
                                 isOver = true;
                             }
-                        } else {        // 如果搜索已经结束 则进入结束动画
+                        } else {
                             mCurrentState = State.ENDING;
+                            mSearchingAnimator.removeAllListeners();
                             mEndingAnimator.start();
                         }
                         break;
                     case ENDING:
-                        // 从结束动画转变为无状态
                         mCurrentState = State.NONE;
                         break;
                 }
@@ -204,9 +169,9 @@ public class SearchView extends View {
         mSearchingAnimator = ValueAnimator.ofFloat(0, 1).setDuration(defaultDuration);
         mEndingAnimator = ValueAnimator.ofFloat(1, 0).setDuration(defaultDuration);
 
-        mStartingAnimator.addUpdateListener(mUpdateListener);
-        mSearchingAnimator.addUpdateListener(mUpdateListener);
-        mEndingAnimator.addUpdateListener(mUpdateListener);
+        mStartingAnimator.addUpdateListener(mUpdataListener);
+        mSearchingAnimator.addUpdateListener(mUpdataListener);
+        mEndingAnimator.addUpdateListener(mUpdataListener);
 
         mStartingAnimator.addListener(mAnimatorListener);
         mSearchingAnimator.addListener(mAnimatorListener);
@@ -214,48 +179,31 @@ public class SearchView extends View {
     }
 
     @Override
-    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
-        super.onSizeChanged(w, h, oldw, oldh);
-        mViewWidth = w;
-        mViewHeight = h;
-    }
-
-    @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-
         drawSearch(canvas);
     }
 
     private void drawSearch(Canvas canvas) {
-
         mPaint.setColor(Color.WHITE);
-
-        canvas.translate(mViewWidth / 2, mViewHeight / 2);
-
+        canvas.translate(mViewWidth / 2, mViewHight / 2);
         canvas.drawColor(Color.parseColor("#0082D7"));
-
         switch (mCurrentState) {
             case NONE:
-                canvas.drawPath(path_srarch, mPaint);
+                canvas.drawPath(path_Search, mPaint);
                 break;
             case STARTING:
-                mMeasure.setPath(path_srarch, false);
-                Path dst = new Path();
-                mMeasure.getSegment(mMeasure.getLength() * mAnimatorValue, mMeasure.getLength(), dst, true);
-                canvas.drawPath(dst, mPaint);
+                Path dst1 = new Path();
+                mMeasure.setPath(path_Search, false);
+                mMeasure.getSegment(mMeasure.getLength() * mAnimatorValue, mMeasure.getLength(), dst1, true);
+                canvas.drawPath(dst1, mPaint);
                 break;
             case SEARCHING:
-                mMeasure.setPath(path_circle, false);
-                Path dst2 = new Path();
-                float stop = mMeasure.getLength() * mAnimatorValue;
-                float start = (float) (stop - ((0.5 - Math.abs(mAnimatorValue - 0.5)) * 200f));
-                mMeasure.getSegment(start, stop, dst2, true);
-                canvas.drawPath(dst2, mPaint);
+
                 break;
             case ENDING:
-                mMeasure.setPath(path_srarch, false);
                 Path dst3 = new Path();
+                mMeasure.setPath(path_Search, false);
                 mMeasure.getSegment(mMeasure.getLength() * mAnimatorValue, mMeasure.getLength(), dst3, true);
                 canvas.drawPath(dst3, mPaint);
                 break;
