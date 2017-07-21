@@ -52,7 +52,7 @@ public class SearchView1 extends View {
         init();
     }
 
-    private void init() {
+    public void init() {
         initPaint();
         initPath();
         initListener();
@@ -89,7 +89,7 @@ public class SearchView1 extends View {
 
         path_Search = new Path();
         RectF oval2 = new RectF(-50, -50, 50, 50);
-        path_Search.addArc(oval1, 45, 359.9f);
+        path_Search.addArc(oval2, 45, 359.9f);
 
         mMeasure.setPath(path_Circle, false);
         mMeasure.getPosTan(0, pos, null);
@@ -199,7 +199,12 @@ public class SearchView1 extends View {
                 canvas.drawPath(dst1, mPaint);
                 break;
             case SEARCHING:
-
+                Path dst2 = new Path();
+                mMeasure.setPath(path_Circle, false);
+                float stop = mMeasure.getLength() * mAnimatorValue;
+                float start = (float) (stop - ((0.5 - Math.abs(mAnimatorValue - 0.5)) * mMeasure.getLength()));
+                mMeasure.getSegment(start, stop, dst2, true);
+                canvas.drawPath(dst2, mPaint);
                 break;
             case ENDING:
                 Path dst3 = new Path();
