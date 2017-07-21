@@ -209,6 +209,7 @@ public class SearchView1 extends View {
             case ENDING:
                 Path dst3 = new Path();
                 mMeasure.setPath(path_Search, false);
+                //startD、stopD指的是某个距离上的点
                 mMeasure.getSegment(mMeasure.getLength() * mAnimatorValue, mMeasure.getLength(), dst3, true);
                 canvas.drawPath(dst3, mPaint);
                 break;
