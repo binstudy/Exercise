@@ -55,12 +55,14 @@ public class DialProgress extends View {
     private int mUnitColor;
     private float mUnitOffset;
     private CharSequence mUnit;
+
     //前景圆弧
     private Paint mArcPaint;
     private float mArcWidth;
     private int mDialIntervalDegree;
     private float mStartAngle, mSweepAngle;
     private RectF mRectF;
+
     //渐变
     private int[] mGradientColors = {Color.GREEN, Color.YELLOW, Color.RED};
     //当前进度，[0.0f,1.0f]
@@ -147,7 +149,7 @@ public class DialProgress extends View {
                 e.printStackTrace();
             }
         }
-
+        typedArray.recycle();
     }
 
     private void initPaint() {
