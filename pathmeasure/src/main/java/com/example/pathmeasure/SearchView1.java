@@ -202,6 +202,7 @@ public class SearchView1 extends View {
                 Path dst2 = new Path();
                 mMeasure.setPath(path_Circle, false);
                 float stop = mMeasure.getLength() * mAnimatorValue;
+                //下面这句没算明白QQQ
                 float start = (float) (stop - ((0.5 - Math.abs(mAnimatorValue - 0.5)) * mMeasure.getLength()));
                 mMeasure.getSegment(start, stop, dst2, true);
                 canvas.drawPath(dst2, mPaint);
