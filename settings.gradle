@@ -1,1 +1,1 @@
-include ':app', ':circleprogress', ':testrecyclerview', ':galleryrecyclerview', ':pathtest', ':radarpic', ':bezierview', ':pathmeasure', ':matrixtest'
+include ':app', ':circleprogress', ':testrecyclerview', ':galleryrecyclerview', ':pathtest', ':radarpic', ':bezierview', ':pathmeasure', ':matrixtest', ':myapplication'

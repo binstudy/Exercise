@@ -1,0 +1,349 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+    <string name="about_page_title">সম্বন্ধে</string>
+    <string name="cooler_temp_down_title">শীতল নিচে পর্যন্ত</string>
+    <string name="cooler_temp_has_down">পতন</string>
+    <string name="cpu_guard_btn_clean_apps">ক্লিন হিটার অ্যাপস</string>
+    <string name="cpu_guard_dialog_content_summary">সিপিইউ এর ব্যবহার খুব বেশী, ফলস্বরূপ তাপমাত্রা বেড়ে যায় এবং কার্যকারিতা কমে যায়।</string>
+    <string name="cpu_guard_dialog_summary1">তাপমাত্রার ওপর এই অ্যাপের খুব সামান্যই প্রভাব আছে। আপনি ব্যাকগ্রাউন্ডে এটিকে চালিয়ে রাখতে পারেন। </string>
+    <string name="cpu_guard_dialog_summary2">তাপমাত্রার ওপর এই অ্যাপের মাঝারি ধরনের প্রভাব আছে, যা কার্যকারিতা কমিয়ে দিতে পারে। যদি বারংবার ব্যবহার না করা হয়, তাহলে বন্ধ করে দেওয়ার পরামর্শ দেওয়া হচ্ছে।</string>
+    <string name="cpu_guard_dialog_summary3">তাপমাত্রার ওপর এই অ্যাপের বড় প্রভাব আছে, যা ফোনকে মন্থর করে দিতে পারে। যদি বারংবার ব্যবহার না করা হয়, তাহলে বন্ধ করে দেওয়ার পরামর্শ দেওয়া হচ্ছে।</string>
+    <string name="cpu_guard_dialog_summary4">তাপমাত্রার ওপর এই অ্যাপের বৃহত্তর প্রভাব আছে, যা ফোনের ব্যাটারিকে নষ্ট করে দিতে পারে। আপনি যদি তা না চালান, তাহলে বন্ধ করে দেওয়ার পরামর্শ দেওয়া হচ্ছে।</string>
+    <string name="cpu_guard_dialog_summary5">তাপমাত্রার ওপর এই অ্যাপের বৃহত্তর প্রভাব আছে, যা ফোনকে নষ্ট করে দিতে পারে। আপনি যদি তা না চালান, তাহলে বন্ধ করে দেওয়ার পরামর্শ দেওয়া হচ্ছে।</string>
+    <string name="cpu_guard_fun_des">“অনেক বেশী অ্যাপ ফোনকে গরম করে দিতে পারে। কুল ডাউন তাপমাত্রার পরিবর্তন পর্যবেক্ষণে রাখে, সমস্যাদায়ক অ্যাপগুলোকে খুঁজে বার করে এবং শীতলীকরণ প্রক্রিয়া চালু করে যা ফোনের তাপমাত্রাকে অনেকখানি কমিয়ে দিতে পারে।”</string>
+    <string name="cpu_guard_list_content_title">নিম্নলিখিত অ্যাপ্লিকেশন ফোন আপ উত্তাপন করা হয়:</string>
+    <string name="cpu_guard_notifi_title">ডিভাইস অতিরিক্ত গরম</string>
+    <string name="cpu_guard_list_percent_summer">উচ্চতা</string>
+
+
+    <string name="cpu_main_normal_des">টেম্প ঠিক আছে</string>
+    <string name="cpu_main_unnormal_des">টেম্প ঠিক না</string>
+    <string name="feedback_title">ব্যবহারকারী প্রতিক্রিয়া</string>
+
+    <string name="lock_screen_setting_content">“বর্তমান চার্জ অবস্থা দেখায়, এবং উদ্যোগ কর্তার বিষয়বস্তু দেখায়”</string>
+
+
+
+
+    <string name="netflow_screenoff_btn">এখন ঠিক করা</string>
+    <string name="no_process_optimized_result_msg">কোন গরম অ্যাপস</string>
+    <string name="scanning_cpu_title">স্ক্যানিং CPU…</string>
+    <string name="smart_locker_title">স্মার্ট লকার</string>
+
+
+
+     <string name="battery_state_card_title">ব্যাটারি</string>
+
+
+    <string name="cool_down_text">নিচে শীতল</string>
+    <!-- add by sjl-->
+    <string name="cool_optimize_text">শুধু অনুকূলকৃত</string>
+
+    <string name="battery_full_time_start_text">সম্পূর্ণরূপে চার্জ ত্যাগ</string>
+    <plurals name="battery_full_time_hour">
+        <item quantity="one">%1$d ঘন্টা</item>
+        <item quantity="other">%1$d ঘন্টার</item>
+    </plurals>
+    <plurals name="battery_full_time_minute">
+        <item quantity="one">%1$d মিনিট</item>
+        <item quantity="other">%1$d মিনিট</item>
+    </plurals>
+    <string name="battery_is_full">সম্পূর্ণরূপে চার্জ চার্জার আনপ্লাগ করুন</string>
+
+    <string name="rate_us_des">আপনার সমর্থন আমাদেরকে ক্রমাগত উন্নতির দিকে এগিয়ে নিয়ে যাবে</string>
+    <string name="rate_us_five_stars">5 স্টার রেটিং</string>
+    <string name="rate_us_dislike">অপছন্দ</string>
+    <string name="rate_us">আমাদের রেটিং বলুন</string>
+    <string name="versions">সংস্করণ 2.6</string>
+    <string name="cool_result_ad_action">এখন ইন্সটল করুন</string>
+
+    <string name="cancel">বাতিল</string>
+
+    <string name="battery_info_battery_level">ব্যাটারি স্তর</string>
+    <string name="battery_info_battery_pressure">ভোল্টেজ</string>
+    <string name="battery_info_battery_technology">ব্যাটারি প্রযুক্তি</string>
+    <string name="battery_info_battery_temperature">ব্যাটারি তাপমাত্রা</string>
+    <string name="battery_info_health_condition">স্বাস্থ্য নির্ধারণ</string>
+    <string name="battery_info_title">ব্যাটারি তথ্য</string>
+
+    <string name="too_many_notifications_des">Too many junk notifications lagging your device!</string>
+    <string name="notification_cleaner">Notification Cleaner</string>
+    <string name="junk_notifications">junk notifications</string>
+    <string name="notification_settings_head_des_on">On</string>
+    <string name="notification_settings_head_des_off">Off</string>
+    <string name="notification_clean_now">Clean now</string>
+    <string name="a_new_notification">A new notification</string>
+    <string name="notification_cleaner_title">Junk Notifications:</string>
+    <string name="mian_useful">اختصارات مفيدة</string>
+
+    //AAAA
+
+    <string name="lc_unlock_tips">> > Slide to unlock</string>
+    <string name="running_app_text">Running apps</string>
+
+    <string name="settings_text">Settings</string>
+
+    <string name="release">Cleaned</string>
+    <string name="boost_reach_to_best">Boosted to optimized status</string>
+
+    <string name="junk_clean">Junk clean</string>
+    <string name="apk_clean">Obsolete APK</string>
+    <string name="tmp_clean">System Temp Files</string>
+    <string name="log_clean">Log Files</string>
+    <string name="cache_clean">Cache Junk</string>
+    <string name="system_cache">System Cache</string>
+    <string name="memory_junk_clean">Memory Junk</string>
+
+
+    <string name="boost_function_entry_title">Phone Boost</string>
+    <string name="boost_function_entry_summary">Speed up your device and save more battery.</string>
+    <string name="ignore_list_function_entry_title">add apps to ignore list</string>
+    <string name="ignore_list_function_entry_summary">Just add those apps into ignore list and avoid having them stopped while boosting</string>
+    <string name="clean_function_entry_title">Junk Clean</string>
+    <string name="clean_function_entry_summary">Delete cache and residual files to reclaim storage.</string>
+
+    <string name="add">Add</string>
+    <string name="clean">Clean</string>
+    <string name="boost">Boost</string>
+
+    <string name="page_title_ignore_list">Ignore List</string>
+    <string name="page_title_ignore_list_add">Add to Ignore List</string>
+    <string name="page_title_junk_files">Junk Files</string>
+    <string name="phone_boost">Phone Boost</string>
+    <string name="share">Share</string>
+
+    <string name="rate_us_like_booster">Rate Cleaner</string>
+    <string name="pref_ignore_title">Add apps to ignore list</string>
+    <string name="ignore_click_tips">Tap "+" icon to add apps</string>
+    <string name="has_been_cleaned">Junk Files Cleaned</string>
+    <string name="free_memory">Freed</string>
+    <string name="head_memory_desc_percent">Used</string>
+    <string name="head_memory_desc_clean">Freeable</string>
+    <string name="memory_use">RAM USED</string>
+    <string name="suggest_clean">Suggested</string>
+    <string name="add_ignore_list">Add to Ignore List</string>
+
+
+    <string name="optimize_clean_tips">Clean junk file</string>
+    <string name="optimize_clean_title">Junk Clean</string>
+    <string name="optimize_boost_tips">Kill running apps</string>
+    <string name="optimize_boost_title">Phone Boost</string>
+    <string name="optimize_auto_start_tips">Auto-start apps forbade</string>
+    <string name="optimize_auto_start_title">Auto kill</string>
+
+    <string name="optimize_clean_best">Clean junk file completed</string>
+    <string name="optimize_boost_best">Kill running apps completed</string>
+    <string name="optimize_auto_start_best">Auto-start apps forbade Completed</string>
+    <string name="junk_cleaned">junk files cleaned</string>
+    <string name="junk_clean_complete">No Junk Detected</string>
+
+
+    <string name="send_feedback">Send feedback</string>
+    <string name="rate_love_text">Rate the app in Play Store or send us the feedback. Spread the love!</string>
+    <string name="enjoying_file_manager">Enjoying Super Cleaner?</string>
+
+    <string name="tab_title_backup">BACKUP</string>
+    <string name="tab_title_restore">RESTORE</string>
+
+    <string name="dialog_title_permission">Permission Request</string>
+    <string name="dialog_content_permission">
+        For this app to work, you need to grant the required permissions.
+        \nDo you want to go to permission settings and grant permissions?
+    </string>
+
+
+    <string name="cpu_guard_dialog_title_summary2">CPU cost %s%%</string>
+    <string name="help_actionbar_title">Help</string>
+
+    <string name="space_analysis_tittle">Storage</string>
+    <string name="space_pic">Pictures</string>
+    <string name="space_music">Music</string>
+    <string name="space_video">Video</string>
+    <string name="space_uninstall">Uninstall</string>
+    <string name="space_bigfiles">Big Files</string>
+    <string name="space_photos">Photos</string>
+    <string name="space_permission">This app may not work correctly without the requested permissions.</string>
+    <string name="optimize">Optimize</string>
+    <string name="clean_result_des">Extended standby time</string>
+    <string name="reach_best_state">Has reached the best state</string>
+    <string name="clean_result_value">Mins</string>
+
+    <string name="space_look">CHECK!</string>
+    <string name="space_piece">All</string>
+    <string name="space_delete_music">Clean songs you no more listen to</string>
+    <string name="space_delete_video">Clean what you`ve watched to save storage</string>
+    <string name="space_delete_uninstall">Uninstall what you no longer need</string>
+    <string name="space_delete_bigfile">Discover lage folders and files</string>
+    <string name="space_sum_music">Songs</string>
+    <string name="space_sum_vedio">Videos</string>
+    <string name="space_sum_bigfiles">Files</string>
+    <string name="space_sum_pic_duplicate">Duplicate</string>
+    <string name="space_small_pic">Pics</string>
+    <string name="space_small_app">Apps</string>
+    <string name="space_small_video">Videos</string>
+    <string name="space_small_music">Musics</string>
+    <string name="space_small_other">Others</string>
+    <string name="space_dupliacte">Duplicate Photos</string>
+    <string name="space_scanning">SCANNING</string>
+    <string name="space_similar_total_found">Total found</string>
+    <string name="space_similar_files_to">files to be processed</string>
+    <string name="space_no_file">No File</string>
+
+    <string name="notify_ram_title">Running slow, boost speed</string>
+    <string name="notify_ram_content">Memory usage is heavy</string>
+
+    <string name="temp_optimal">Leave your phone alone for 60S will help the cooling process</string>
+    <string name="dropped">Dropped</string>
+    <string name="notification_entry_title">Clean Junk Notifications</string>
+    <string name="notification_entry_summary">Avoid annoying junk notifications from slowing down devices</string>
+
+
+    <string name="rate_card_summary">Extended standby time: %s</string>
+    <string name="rate_card_msg1">Give us a 5-Star rating!</string>
+    <string name="rate_end_tips">Perfect!</string>
+    <string name="rate_button_go_rate">RATE 5 STARS</string>
+    <string name="app_manager_date">Date</string>
+    <string name="app_manager_name">Name</string>
+    <string name="app_manager_size">Size</string>
+    <string name="app_manager_battery">Battery</string>
+    <string name="boost_scanning">SCANNING</string>
+    <string name="setting_notification_toggle">Notification Toggle</string>
+    <string name="notification_boost">Boost</string>
+    <string name="notification_clean">Clean</string>
+    <string name="notification_cooler">Cooler</string>
+    <string name="notification_torch">Torch</string>
+    <string name="notification_setting">Setting</string>
+
+    <string name="notification_card_title">Power vampires</string>
+    <string name="duswipe_diagnostic_btn_text_2nd">Extend Standby</string>
+    <string name="du_swipe_card_title">Quick Savers</string>
+    <string name="diagnostic_ad_clean_app">Secret users</string>
+    <string name="cpu_card_title">Phone temp</string>
+    <string name="diagnostic_scan_gps">GPS</string>
+    <string name="diagnostic_scan_message">Mode settings</string>
+    <string name="diagnostic_scan_rate">System wakers</string>
+    <string name="diagnostic_scan_share">Operation items</string>
+    <string name="diagnostic_scan_skin">Custom saving mode</string>
+    <string name="diagnostic_scan_smart">Smart saving mode</string>
+    <string name="diagnostic_smart_page_entrance">Auto-start in background</string>
+    <string name="diagnostic_status_scan">Scanning: Power consumption app(s)</string>
+    <string name="duswipe_diagnostic_title">Overall Power-Usage Scan</string>
+    <string name="linked_start_card_title">Abnormal power-usage items</string>
+    <string name="notify_alarm_card_title_txt">Frequent wakers</string>
+    <string name="open_notificatio_access_text">Notification items</string>
+    <string name="quick_charge_card_title">Smart Charge</string>
+    <string name="result_card_other_title">Power savers</string>
+    <string name="scan_auto_sync">System sync items</string>
+    <string name="scan_bluetooth">Bluetooth state</string>
+    <string name="scan_brightness">Screen settings</string>
+    <string name="scan_result_optimize">TRY</string>
+    <string name="scan_timeout">Screen timeout items</string>
+    <string name="scan_wifi">WLAN state</string>
+
+    <string-array name="lock_time_array">
+        <item>15 second</item>
+        <item>30 second</item>
+        <item>1 minute</item>
+        <item>3 minute</item>
+        <item>5 minute</item>
+        <item>10 minute</item>
+        <item>30 minute</item>
+        <item>immediately</item>
+    </string-array>
+
+
+    <string name="applock">APPLOCK</string>
+    <string name="applock_close">Close</string>
+    <string name="applock_lowercase">Applock</string>
+    <string name="applock_ensure">Ensure the private data of these apps</string>
+    <string name="applock_setting">AppLock Setting</string>
+    <string name="applock_change_passcode">Change Pattern</string>
+    <string name="applock_done">Done</string>
+    <string name="applock_email_done">Set up recovery email</string>
+    <string name="applock_set_pattern">Setting the unlock pattern of apps</string>
+    <string name="applock_empty">please enter the correct email</string>
+    <string name="applock_error">please enter the correct email</string>
+
+    <string name="applock_enable">Enable Applock</string>
+    <string name="applock_test">Protest your privacy now!</string>
+    <string name="applock_forgot">Forgot Password</string>
+    <string name="applock_give_access">GIVE ACCESS</string>
+    <string name="applock_cancel">CANCEL</string>
+    <string name="applock_give_access_top">Give %s usage access?</string>
+    <string name="applock_give_access_middle">In Android 5.0 and above, %s must have usage access to know when other apps are started.</string>
+    <string name="applock_no_permission_granted">No permission granted</string>
+
+
+    <string name="applock_not_do_match">Patterns do not match, try again</string>
+    <string name="applock_create_unlock_pattern">Create an unlock pattern</string>
+    <string name="applock_confirm_unlock_pattern">Comfirm unlock pattern</string>
+    <string name="applock_too_short">"Patterns too short.
+Connect at least 4 dots."</string>
+
+
+    <string name="pl_access_pattern_start">Pattern started</string>
+    <string name="pl_access_pattern_cleared">Pattern cleared</string>
+    <string name="pl_access_pattern_cell_added">Cell added</string>
+    <string name="pl_access_pattern_cell_added_verbose">Cell <xliff:g example="3" id="cell_index">%1$d</xliff:g> added</string>
+    <string name="pl_access_pattern_detected">Pattern completed</string>
+    <string name="pl_access_pattern_area">Pattern area.</string>
+
+
+    <string name="mian_device">Device Info</string>
+    <string name="mian_free_up">Free Up Space</string>
+    <string name="mian_bigfile">Big File Clean</string>
+    <string name="mian_update">Update</string>
+
+    <string name="device_info_ram">RAM</string>
+    <string name="device_info_resolution">Resolution</string>
+    <string name="device_info_android_version">Android Version</string>
+    <string name="device_info_front_camera">Front Camera</string>
+    <string name="device_info_rear_camera">Rear Camera</string>
+
+    <string name="device_info_model">Model</string>
+    <string name="device_info_cores">Cores</string>
+
+    <string name="device_info_health_status">Health Status</string>
+    <string name="device_info_total_capacity">Total Capacity</string>
+    <string name="device_info_current_voltage">Voltage</string>
+    <string name="device_info_current_temperature">Temperature</string>
+    <string name="device_info_current_battery_status">Battery Status</string>
+    <string name="device_info_current_charge_status">Charge Status</string>
+    <string name="device_info_current_battery_technology">Battery Technology</string>
+    <string name="device_info_chargeing">Charging</string>
+    <string name="device_info_notcharging">Not Changing</string>
+    <string name="device_info_uncharged">Unchanged</string>
+    <string name="device_info_usb">USB Changing</string>
+    <string name="device_info_ac">AC Charging</string>
+
+    <string name="device_info_cool_down">Cool Down</string>
+    <string name="device_info_sd_card">SD Card</string>
+    <string name="device_info_network">Network</string>
+    <string name="device_details">Details</string>
+    <string name="network_analysis">Network Analysis</string>
+    <string name="network_analysis_stop">Stop</string>
+    <string name="network_default">0.00KB/s</string>
+    <string name="main_free_memory">,cleaned %s totally.</string>
+    <string name="main_day">We have helped you for %s days </string>
+
+
+    <string name="accessibility_description">"2/2: Tap the switch at the upper right and tap \"OK\" to enable Cooler Master Long-Lasting Cooling.
+
+Cooler Master uses accessibility features to close background apps. It does NOT collect your personal information even if you see a privacy risk alert."</string>
+
+    <string name="clean_dialog_button">ENABLE</string>
+    <string name="clean_dialog_title">LONG-LASTING COOLING</string>
+    <string name="clean_dialog_main_desc">It\'s  &lt;font color=#FA394E &gt;&lt;tt&gt;more effective&lt;/tt&gt;&lt;/font&gt; to cool down your phone.&lt;br&gt;The cooling effect is &lt;font color=#FA394E&gt;&lt;tt&gt;50%% higher&lt;/tt&gt;&lt;/font&gt; than the usual way.</string>
+    <string name="clean_dialog_desc">Please turn on the LONG-LASTING COOLING for better experience</string>
+
+
+    <string name="notification_ignore_title">Select Affected Apps</string>
+
+
+    <string name="boost_can_be_freed_up">Can be released</string>
+    <string name="boost_memory_in_use">%1$s%% memory in use</string>
+    <string name="clean_to_release">Clean to release</string>
+    <string name="click_to_boost">Click to boost</string>
+
+</resources>
+
