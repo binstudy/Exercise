@@ -146,7 +146,6 @@ public class SearchView1 extends View {
                         if (!isOver) {
                             mSearchingAnimator.start();
                             count++;
-
                             if (count > 2) {
                                 isOver = true;
                             }
