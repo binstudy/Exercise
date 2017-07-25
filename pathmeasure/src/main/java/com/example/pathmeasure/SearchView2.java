@@ -1,7 +1,6 @@
 package com.example.pathmeasure;
 
 import android.content.Context;
-import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
 
@@ -12,10 +11,10 @@ import android.view.View;
 public class SearchView2 extends View {
 
     public SearchView2(Context context) {
-        super(context);
+        this(context, null);
     }
 
-    public SearchView2(Context context, @Nullable AttributeSet attrs) {
+    public SearchView2(Context context, AttributeSet attrs) {
         super(context, attrs);
         init();
     }

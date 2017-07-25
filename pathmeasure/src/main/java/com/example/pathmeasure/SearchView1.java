@@ -19,6 +19,7 @@ import android.view.View;
  */
 
 public class SearchView1 extends View {
+
     private Paint mPaint;
     private int mViewWidth, mViewHight;
     private State mCurrentState = State.NONE;
@@ -29,14 +30,11 @@ public class SearchView1 extends View {
     private ValueAnimator mStartingAnimator;
     private ValueAnimator mSearchingAnimator;
     private ValueAnimator mEndingAnimator;
-
     private float mAnimatorValue = 0;
     private ValueAnimator.AnimatorUpdateListener mUpdataListener;
     private Animator.AnimatorListener mAnimatorListener;
-
     private Handler mAnimatorHandler;
     private boolean isOver = false;
-
     private int count = 0;
 
     static enum State {
@@ -58,7 +56,6 @@ public class SearchView1 extends View {
         initListener();
         initHandler();
         initAnimator();
-
         mCurrentState = State.STARTING;
         mStartingAnimator.start();
     }
