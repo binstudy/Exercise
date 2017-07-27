@@ -10,7 +10,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        final SearchView1 sv = (SearchView1) findViewById(R.id.sv_sv);
+        final SearchView2 sv = (SearchView2) findViewById(R.id.sv_sv);
         sv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

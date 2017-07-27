@@ -9,7 +9,7 @@
         <!--android:layout_width="match_parent"-->
         <!--android:layout_height="match_parent" />-->
 
-    <com.example.pathmeasure.SearchView1
+    <com.example.pathmeasure.SearchView2
         android:id="@+id/sv_sv"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

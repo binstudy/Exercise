@@ -20,7 +20,7 @@ import android.view.View;
 
 public class SearchView2 extends View {
 
-    enum State {
+    private enum State {
         NONE, STARTING, SEARCHING, ENDING
     }
 
@@ -90,7 +90,7 @@ public class SearchView2 extends View {
 
         path_Search = new Path();
         path_Search.addArc(r2, 45, 359.9f);
-        mPathMeasure.setPath(path_Search, false);
+        mPathMeasure.setPath(path_Circle, false);
         mPathMeasure.getPosTan(0, pos, null);
         path_Search.lineTo(pos[0], pos[1]);
     }
