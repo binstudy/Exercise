@@ -80,7 +80,10 @@ public class MeasureView extends View {
 
     private void drawPathMeasure5(Canvas canvas) {
         Path path = new Path();
-        path.addCircle(0, 0, 200, Path.Direction.CW);
+//        path.addCircle(0, 0, 200, Path.Direction.CW);
+        path.moveTo(-200, 0);
+        path.quadTo(0, 300, 200, 0);
+        path.close();
         PathMeasure pm = new PathMeasure(path, false);
         currentValue += 0.005;
         if (currentValue >= 1) {
@@ -90,7 +93,7 @@ public class MeasureView extends View {
                 PathMeasure.POSITION_MATRIX_FLAG | PathMeasure.TANGENT_MATRIX_FLAG);
         mMatrix.preTranslate(-mBitmap.getWidth() / 2, -mBitmap.getHeight() / 2);
         canvas.drawPath(path, mPaintBlack);
-        canvas.drawBitmap(mBitmap,mMatrix,mPaintBlack);
+        canvas.drawBitmap(mBitmap, mMatrix, mPaintBlack);
         invalidate();
     }
 
