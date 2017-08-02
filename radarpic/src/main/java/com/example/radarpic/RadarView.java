@@ -81,33 +81,6 @@ public class RadarView extends View {
     }
 
     /**
-     * 绘制数值区域
-     *
-     * @param canvas
-     */
-    private void drawRegion(Canvas canvas) {
-        Path path = new Path();
-        valuePaint.setAlpha(255);
-        for (int i = 0; i < count; i++) {
-            double percent = data[i] / maxValue;
-            float x = (float) (centerX + radius * Math.cos(angle * i) * percent);
-            float y = (float) (centerY + radius * Math.sin(angle * i) * percent);
-            if (i == 0) {
-                path.moveTo(x, y);
-            } else {
-                path.lineTo(x, y);
-            }
-            canvas.drawCircle(x, y, 10, valuePaint);
-        }
-        path.close();
-        valuePaint.setStyle(Paint.Style.STROKE);
-        canvas.drawPath(path, valuePaint);
-        valuePaint.setAlpha(127);
-        valuePaint.setStyle(Paint.Style.FILL);
-        canvas.drawPath(path, valuePaint);
-    }
-
-    /**
      * 绘制多边形
      *
      * @param canvas
@@ -146,6 +119,33 @@ public class RadarView extends View {
             path.lineTo(x, y);
         }
         canvas.drawPath(path, mainPaint);
+    }
+
+    /**
+     * 绘制数值区域
+     *
+     * @param canvas
+     */
+    private void drawRegion(Canvas canvas) {
+        Path path = new Path();
+        valuePaint.setAlpha(255);
+        for (int i = 0; i < count; i++) {
+            double percent = data[i] / maxValue;
+            float x = (float) (centerX + radius * Math.cos(angle * i) * percent);
+            float y = (float) (centerY + radius * Math.sin(angle * i) * percent);
+            if (i == 0) {
+                path.moveTo(x, y);
+            } else {
+                path.lineTo(x, y);
+            }
+            canvas.drawCircle(x, y, 10, valuePaint);
+        }
+        path.close();
+        valuePaint.setStyle(Paint.Style.STROKE);
+        canvas.drawPath(path, valuePaint);
+        valuePaint.setAlpha(127);
+        valuePaint.setStyle(Paint.Style.FILL);
+        canvas.drawPath(path, valuePaint);
     }
 
     /**
