@@ -22,10 +22,10 @@ public class RadarView extends View {
     private int centerY;
     private String[] titles = {"a", "b", "c", "d", "e", "f"};
     private double[] data = {100, 60, 60, 60, 100, 50, 10, 20}; //各维度分值
-    private float maxValue = 100;             //数据最大值
+    private float maxValue = 100;           //数据最大值
     private Paint mainPaint;                //雷达区画笔
     private Paint valuePaint;               //数据区画笔
-    private TextPaint textPaint;                //文本画笔
+    private TextPaint textPaint;            //文本画笔
 
     public RadarView(Context context) {
         super(context);
