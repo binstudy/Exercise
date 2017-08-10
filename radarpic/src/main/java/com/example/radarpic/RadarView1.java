@@ -71,6 +71,8 @@ public class RadarView1 extends View {
         super.onDraw(canvas);
         drawPolygon(canvas);
         drawLines(canvas);
+        drawRegion(canvas);
+        drawText(canvas);
     }
 
     /**
@@ -90,11 +92,11 @@ public class RadarView1 extends View {
                 } else {
                     float x = (float) (centerX + curR * Math.cos(angle * j));
                     float y = (float) (centerY + curR * Math.sin(angle * j));
-                    path.moveTo(x, y);
+                    path.lineTo(x, y);
                 }
-                path.close();
-                canvas.drawPath(path, mainPaint);
             }
+            path.close();
+            canvas.drawPath(path, mainPaint);
         }
     }
 
@@ -112,6 +114,49 @@ public class RadarView1 extends View {
             path.lineTo(x, y);
         }
         canvas.drawPath(path, mainPaint);
+    }
+
+    /**
+     * 绘制数值区域
+     *
+     * @param canvas
+     */
+    private void drawRegion(Canvas canvas) {
+        Path path = new Path();
+        valuePaint.setAlpha(255);
+        for (int i = 0; i < count; i++) {
+            double percent = data[i] / maxValue;
+            float x = (float) (centerX + radius * Math.cos(angle * i) * percent);
+            float y = (float) (centerY + radius * Math.sin(angle * i) * percent);
+            if (i == 0) {
+                path.moveTo(x, y);
+            } else {
+                path.lineTo(x, y);
+            }
+            canvas.drawCircle(x, y, 10, valuePaint);
+        }
+        path.close();
+        valuePaint.setAlpha(200);
+        valuePaint.setStyle(Paint.Style.STROKE);
+        canvas.drawPath(path, valuePaint);
+        valuePaint.setAlpha(127);
+        valuePaint.setStyle(Paint.Style.FILL);
+        canvas.drawPath(path, valuePaint);
+    }
+
+    /**
+     * 绘制文字
+     *
+     * @param canvas
+     */
+    private void drawText(Canvas canvas) {
+        Paint.FontMetrics fontMetrics = textPaint.getFontMetrics();
+        float fontHeight = fontMetrics.descent - fontMetrics.ascent;
+        for (int i = 0; i < count; i++) {
+            float x = (float) (centerX + (radius + fontHeight) * Math.cos(angle * i));
+            float y = (float) (centerY + (radius + fontHeight) * Math.sin(angle * i));
+            canvas.drawText(titles[i], x, y, textPaint);
+        }
     }
 
 }
