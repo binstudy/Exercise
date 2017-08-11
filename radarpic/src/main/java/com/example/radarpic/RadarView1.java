@@ -114,4 +114,6 @@ public class RadarView1 extends View {
         canvas.drawPath(path, mainPaint);
     }
 
+
+
 }

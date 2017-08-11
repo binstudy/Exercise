@@ -78,6 +78,15 @@ public class MeasureView extends View {
         drawPathMeasure5(canvas);
     }
 
+    private void drawCoordinate(Canvas canvas) {
+        Path path = new Path();
+        path.moveTo(-(mViewWidth / 2), 0);
+        path.lineTo(mViewWidth / 2, 0);
+        path.moveTo(0, -(mViewHeight / 2));
+        path.lineTo(0, mViewHeight / 2);
+        canvas.drawPath(path, mPaint);
+    }
+
     private void drawPathMeasure5(Canvas canvas) {
         Path path = new Path();
 //        path.addCircle(0, 0, 200, Path.Direction.CW);
@@ -158,12 +167,4 @@ public class MeasureView extends View {
         canvas.drawPath(path, mPaintBlack);
     }
 
-    private void drawCoordinate(Canvas canvas) {
-        Path path = new Path();
-        path.moveTo(-(mViewWidth / 2), 0);
-        path.lineTo(mViewWidth / 2, 0);
-        path.moveTo(0, -(mViewHeight / 2));
-        path.lineTo(0, mViewHeight / 2);
-        canvas.drawPath(path, mPaint);
-    }
 }
