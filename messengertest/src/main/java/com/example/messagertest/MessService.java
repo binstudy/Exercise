@@ -10,8 +10,6 @@ import android.os.RemoteException;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
-import static android.R.id.message;
-
 /**
  * Created by LiuBin on 2017/8/18 10:22.
  */
@@ -29,9 +27,11 @@ public class MessService extends Service {
         @Override
         public void handleMessage(Message msg) {
 //            System.out.println("MessService 收到！");
-            Log.e("aaa", "MessService 收到！");
+            Log.e("aaaMessService", "MessService 收到！");
+            Log.e("aaaMessService", msg.what + "");
             Messenger messenger = msg.replyTo;
             Message msg_reply = Message.obtain();
+            msg_reply.what = 222;
             try {
                 messenger.send(msg_reply);
             } catch (RemoteException e) {

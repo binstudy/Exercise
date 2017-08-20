@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
         public void onServiceConnected(ComponentName name, IBinder service) {
             Messenger messenger = new Messenger(service);
             Message message = Message.obtain();
+            message.what = 111;
             message.replyTo = messengeReplyTo;
             try {
                 messenger.send(message);
@@ -48,7 +49,8 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void handleMessage(Message msg) {
 //            System.out.println("MainActivity 收到！");
-            Log.e("aaa", "MainActivity 收到！");
+            Log.e("aaaMainActivity", "MainActivity 收到！");
+            Log.e("aaaMainActivity", msg.what + "");
         }
     };
 }
