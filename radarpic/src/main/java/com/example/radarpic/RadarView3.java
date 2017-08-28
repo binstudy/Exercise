@@ -78,11 +78,35 @@ public class RadarView3 extends View {
     }
 
     private void drawText(Canvas canvas) {
-
+        Paint.FontMetrics pf = textPaint.getFontMetrics();
+        float fontHeight = pf.descent - pf.ascent;
+        for (int i = 0; i < count; i++) {
+            float x = (float) (mCenterX + (radius + fontHeight) * Math.cos(angle * i));
+            float y = (float) (mCenterY + (radius + fontHeight) * Math.sin(angle * i));
+            canvas.drawText(titles[i], x, y, textPaint);
+        }
     }
 
     private void drawRegion(Canvas canvas) {
-
+        Path path = new Path();
+        valuePaint.setAlpha(255);
+        for (int i = 0; i < count; i++) {
+            double percent = data[i] / maxValue;
+            float x = (float) (mCenterX + radius * Math.cos(angle * i) * percent);
+            float y = (float) (mCenterY + radius * Math.sin(angle * i) * percent);
+            if (i == 0) {
+                path.moveTo(x, y);
+            } else {
+                path.lineTo(x, y);
+            }
+            canvas.drawCircle(x, y, 10, valuePaint);
+        }
+        path.close();
+        valuePaint.setStyle(Paint.Style.STROKE);
+        canvas.drawPath(path, valuePaint);
+        valuePaint.setStyle(Paint.Style.FILL);
+        valuePaint.setAlpha(127);
+        canvas.drawPath(path, valuePaint);
     }
 
     private void drawLines(Canvas canvas) {
@@ -115,6 +139,5 @@ public class RadarView3 extends View {
             canvas.drawPath(path, mainPaint);
         }
     }
-
 
 }

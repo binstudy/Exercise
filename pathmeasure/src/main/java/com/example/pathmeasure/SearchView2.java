@@ -84,10 +84,8 @@ public class SearchView2 extends View {
         float[] pos = new float[2];
         RectF r1 = new RectF(-100, -100, 100, 100);
         RectF r2 = new RectF(-50, -50, 50, 50);
-
         path_Circle = new Path();
         path_Circle.addArc(r1, 45, -359.9f);
-
         path_Search = new Path();
         path_Search.addArc(r2, 45, 359.9f);
         mPathMeasure.setPath(path_Circle, false);
