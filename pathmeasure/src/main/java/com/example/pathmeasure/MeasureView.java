@@ -106,6 +106,24 @@ public class MeasureView extends View {
         invalidate();
     }
 
+    public void drawPathMeasure55(Canvas canvas) {
+        Path path = new Path();
+        path.moveTo(-200, -200);
+        path.quadTo(0, -300, 200, 200);
+        path.close();
+        currentValue += 0.005;
+        if (currentValue >= 1) {
+            currentValue = 0;
+        }
+        PathMeasure pm = new PathMeasure(path, false);
+        pm.getMatrix(pm.getLength() * currentValue, mMatrix,
+                PathMeasure.TANGENT_MATRIX_FLAG | PathMeasure.POSITION_MATRIX_FLAG);
+        mMatrix.preTranslate(-mBitmap.getWidth() / 2, -mBitmap.getHeight() / 2);
+        canvas.drawPath(path, mPaintBlack);
+        canvas.drawBitmap(mBitmap, mMatrix, mPaintBlack);
+        invalidate();
+    }
+
     private void drawPathMeasure4(Canvas canvas) {
         Path path = new Path();
 //        path.addCircle(0, 0, 200, Path.Direction.CW);
@@ -124,6 +142,26 @@ public class MeasureView extends View {
         mMatrix.postTranslate(pos[0] - mBitmap.getWidth() / 2, pos[1] - mBitmap.getHeight() / 2);
         canvas.drawPath(path, mPaintBlack);
         canvas.drawBitmap(mBitmap, mMatrix, mPaint);
+        invalidate();
+    }
+
+    private void drawPathMeasure44(Canvas canvas) {
+        Path path = new Path();
+        path.moveTo(-200, -200);
+        path.quadTo(0, 300, 200, 200);
+        path.close();
+        PathMeasure pm = new PathMeasure(path, false);
+        currentValue += 0.002;
+        if (currentValue >= 1) {
+            currentValue = 0;
+        }
+        pm.getPosTan(pm.getLength() * currentValue, pos, tan);
+        mMatrix.reset();
+        float degrees = (float) (Math.atan2(tan[1], tan[0]) * 180 / Math.PI);
+        mMatrix.postRotate(degrees, mBitmap.getWidth(), mBitmap.getHeight());
+        mMatrix.postTranslate(pos[0] - mBitmap.getWidth() / 2, pos[1] - mBitmap.getHeight() / 2);
+        canvas.drawPath(path, mPaintBlack);
+        canvas.drawBitmap(mBitmap, mMatrix, null);
         invalidate();
     }
 

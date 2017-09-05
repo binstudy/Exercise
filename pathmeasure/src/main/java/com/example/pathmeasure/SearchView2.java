@@ -30,8 +30,8 @@ public class SearchView2 extends View {
     private Path path_Circle, path_Search;
     private PathMeasure mPathMeasure;
     private int defaultDuration = 2000;
-    private ValueAnimator mStartingAnimator, mSearchingAnimator, mEndingAnimator;
     private float mAnimatorValue = 0;
+    private ValueAnimator mStartingAnimator, mSearchingAnimator, mEndingAnimator;
     private ValueAnimator.AnimatorUpdateListener mUpdateListener;
     private Animator.AnimatorListener mAnimatorListener;
     private Handler mAnimatorHandler;
