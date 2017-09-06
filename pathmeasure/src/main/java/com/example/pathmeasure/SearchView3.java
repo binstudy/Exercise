@@ -3,6 +3,7 @@ package com.example.pathmeasure;
 import android.animation.Animator;
 import android.animation.ValueAnimator;
 import android.content.Context;
+import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.PathMeasure;
@@ -44,7 +45,30 @@ public class SearchView3 extends View {
         init();
     }
 
+    @Override
+    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+        super.onSizeChanged(w, h, oldw, oldh);
+        mWidth = w;
+        mHight = h;
+    }
+
+    @Override
+    protected void onDraw(Canvas canvas) {
+        super.onDraw(canvas);
+        drawSearch(canvas);
+    }
+
     private void init() {
+//        initPaint();
+//        initPath();
+//        initListener();
+//        initHandler();
+//        initAnimator();
+        mCurrentState = State.STARTING;
+        mStartingAnimator.start();
+    }
+
+    private void drawSearch(Canvas canvas) {
 
     }
 }
