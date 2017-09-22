@@ -15,6 +15,8 @@ import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
 
+import static android.icu.lang.UCharacter.GraphemeClusterBreak.V;
+
 /**
  * Created by LiuBin on 2017/7/24 23:59.
  */
@@ -66,7 +68,7 @@ public class SearchView3 extends View {
         initPath();
         initListener();
         initHandler();
-//        initAnimator();
+        initAnimator();
         mCurrentState = State.STARTING;
         mStartingAnimator.start();
     }
@@ -106,7 +108,6 @@ public class SearchView3 extends View {
         mAnimatorListener = new Animator.AnimatorListener() {
             @Override
             public void onAnimationStart(Animator animator) {
-
             }
 
             @Override
@@ -116,14 +117,26 @@ public class SearchView3 extends View {
 
             @Override
             public void onAnimationCancel(Animator animator) {
-
             }
 
             @Override
             public void onAnimationRepeat(Animator animator) {
-
             }
         };
+    }
+
+    private void initAnimator() {
+        mStartingAnimator = ValueAnimator.ofFloat(0, 1).setDuration(defaultDuration);
+        mSearchingAnimator = ValueAnimator.ofFloat(0, 1).setDuration(defaultDuration);
+        mEndingAnimator = ValueAnimator.ofFloat(1, 0).setDuration(defaultDuration);
+
+        mStartingAnimator.addUpdateListener(mUpdateListener);
+        mSearchingAnimator.addUpdateListener(mUpdateListener);
+        mEndingAnimator.addUpdateListener(mUpdateListener);
+
+        mStartingAnimator.addListener(mAnimatorListener);
+        mSearchingAnimator.addListener(mAnimatorListener);
+        mEndingAnimator.addListener(mAnimatorListener);
     }
 
     private void initHandler() {
@@ -161,6 +174,34 @@ public class SearchView3 extends View {
     }
 
     private void drawSearch(Canvas canvas) {
-
+        canvas.translate(mWidth / 2, mHight / 2);
+        canvas.drawColor(Color.parseColor("#0082D7"));
+        switch (mCurrentState) {
+            case NONE:
+                canvas.drawPath(path_Circle, mPaint);
+                break;
+            case STARTING:
+                Path path = new Path();
+                mPathMeasure.setPath(path_Search, false);
+                mPathMeasure.getSegment(mPathMeasure.getLength() * mAnimatorValue, mPathMeasure.getLength(), path, true);
+                canvas.drawPath(path, mPaint);
+                break;
+            case SEARCHING:
+                Path dst2 = new Path();
+                mPathMeasure.setPath(path_Circle, false);
+                float stop = mPathMeasure.getLength() * mAnimatorValue;
+                //下面这句没算明白QQQ
+                float start = (float) (stop - ((0.5 - Math.abs(mAnimatorValue - 0.5)) * mPathMeasure.getLength()));
+                mPathMeasure.getSegment(start, stop, dst2, true);
+                canvas.drawPath(dst2, mPaint);
+                break;
+            case ENDING:
+                Path dst3 = new Path();
+                mPathMeasure.setPath(path_Search, false);
+                //startD、stopD指的是某个距离上的点
+                mPathMeasure.getSegment(mPathMeasure.getLength() * mAnimatorValue, mPathMeasure.getLength(), dst3, true);
+                canvas.drawPath(dst3, mPaint);
+                break;
+        }
     }
 }

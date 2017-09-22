@@ -9,10 +9,10 @@
     <!--android:layout_width="match_parent"-->
     <!--android:layout_height="match_parent" />-->
 
-    <!--<com.example.pathmeasure.SearchView2-->
-    <!--android:id="@+id/sv_sv"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent" />-->
+    <com.example.pathmeasure.SearchView3
+    android:id="@+id/sv_sv"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" />
     <TextView
         android:id="@+id/tv_tv"
         android:layout_width="match_parent"
