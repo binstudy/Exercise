@@ -1,1 +1,1 @@
-include ':app', ':circleprogress', ':testrecyclerview', ':galleryrecyclerview', ':pathtest', ':radarpic', ':bezierview', ':pathmeasure', ':matrixtest', ':messengertest', ':aidltest', ':iconfont', ':testbessel'
+include ':app', ':circleprogress', ':testrecyclerview', ':galleryrecyclerview', ':pathtest', ':radarpic', ':bezierview', ':pathmeasure', ':matrixtest', ':messengertest', ':aidltest', ':iconfont', ':testbessel',':mybesselview'

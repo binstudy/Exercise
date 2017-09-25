@@ -22,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
 //                sv.init();
 //            }
 //        });
+        //手势检测器
         gestureDetector = new GestureDetector(this, new MyOnGestureListener());
         findViewById(R.id.tv_tv).setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -34,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
+        //速度跟踪
         VelocityTracker velocityTracker = VelocityTracker.obtain();
         velocityTracker.addMovement(event);
         velocityTracker.computeCurrentVelocity(1000);
