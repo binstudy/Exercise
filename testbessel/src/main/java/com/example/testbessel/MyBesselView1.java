@@ -1,6 +1,7 @@
 package com.example.testbessel;
 
-import android.animation.AnimatorSet;
+import android.animation.Animator;
+import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
@@ -9,9 +10,8 @@ import android.graphics.Path;
 import android.graphics.Rect;
 import android.text.TextPaint;
 import android.util.AttributeSet;
+import android.view.MotionEvent;
 import android.view.View;
-
-import static android.os.Build.VERSION_CODES.M;
 
 /**
  * Created by LiuBin on 2017/9/25 16:21.
@@ -81,10 +81,70 @@ public class MyBesselView1 extends View {
 
         mWidth = width;
         mHeight = height;
-        xWidth = mWidth * 1 / 10;
-        yHeight = mHeight * 1 / 8;
+        xSize = mWidth * 1 / 10;
+        ySize = mHeight * 1 / 8;
+        xWidth = xSize;
+        yHeight = ySize;
         arcHeight = mHeight * 7 / 10;
 
         setMeasuredDimension(width, height);
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        int action = event.getAction();
+        int x = (int) event.getX();
+        int y = (int) event.getY();
+        switch (action) {
+            case MotionEvent.ACTION_DOWN:
+                isSuccess = false;
+                break;
+            case MotionEvent.ACTION_MOVE:
+                xWidth = x;
+                yHeight = y;
+                postInvalidate();
+                break;
+            case MotionEvent.ACTION_UP:
+                if (yHeight > mHeight * 7 / 10 && xWidth > mWidth * 4 / 10 && xWidth > mWidth * 6 / 10) {
+                    startAnim();
+                }
+                break;
+        }
+        return true;
+    }
+
+    private void startAnim() {
+        ValueAnimator va = ValueAnimator.ofFloat(yHeight, -ySize);
+        va.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator valueAnimator) {
+                yHeight = (int) valueAnimator.getAnimatedValue();
+                postInvalidate();
+            }
+        });
+
+        va.addListener(new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animator) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animator) {
+                isSuccess = true;
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animator) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animator) {
+
+            }
+        });
+        va.setDuration(1200);
+        va.start();
     }
 }
