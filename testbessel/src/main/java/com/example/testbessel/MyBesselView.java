@@ -67,7 +67,6 @@ public class MyBesselView extends View {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-
         int action = event.getAction();
         int x = (int) event.getX();
         int y = (int) event.getY();

@@ -11,6 +11,8 @@ import android.text.TextPaint;
 import android.util.AttributeSet;
 import android.view.View;
 
+import static android.os.Build.VERSION_CODES.M;
+
 /**
  * Created by LiuBin on 2017/9/25 16:21.
  */
@@ -60,7 +62,29 @@ public class MyBesselView1 extends View {
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        int widthMode = MeasureSpec.getMode(widthMeasureSpec);
+        int widthSize = MeasureSpec.getSize(widthMeasureSpec);
+        int heightMode = MeasureSpec.getMode(heightMeasureSpec);
+        int heightSize = MeasureSpec.getSize(heightMeasureSpec);
+        int width, height;
 
+        if (widthMode == MeasureSpec.EXACTLY) {
+            width = widthSize;
+        } else {
+            width = widthSize * 1 / 2;
+        }
+        if (heightMode == MeasureSpec.EXACTLY) {
+            height = heightSize;
+        } else {
+            height = heightSize * 1 / 2;
+        }
+
+        mWidth = width;
+        mHeight = height;
+        xWidth = mWidth * 1 / 10;
+        yHeight = mHeight * 1 / 8;
+        arcHeight = mHeight * 7 / 10;
+
+        setMeasuredDimension(width, height);
     }
 }
