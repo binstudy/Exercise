@@ -1,6 +1,8 @@
 package com.studylbn.www.loopviewpager;
 
 import android.content.Context;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.View;
@@ -23,6 +25,7 @@ public abstract class LoopVpAdapter<T> extends PagerAdapter implements ViewPager
     private LinearLayout llll;
     private ArrayList<ImageView> dots;
     private int dotnum = 0;
+    private int p = 1;
 
     public LoopVpAdapter(Context context, ArrayList<T> datas, ViewPager viewPager, LinearLayout llll) {
         mContext = context;
@@ -46,7 +49,30 @@ public abstract class LoopVpAdapter<T> extends PagerAdapter implements ViewPager
         viewPager.setAdapter(this);
         viewPager.addOnPageChangeListener(this);
         viewPager.setCurrentItem(1, false);
+
+        Message message = handler.obtainMessage(1);     // Message
+        handler.sendMessageDelayed(message, 1000);
     }
+
+    Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what) {
+                case 1:
+                    p++;
+                    if (p > views.size() - 1) {
+                        p = 2;
+                    }
+                    if (p < 0) {
+                        p = views.size() - 3;
+                    }
+                    mViewPager.setCurrentItem(p);
+                    Message message = handler.obtainMessage(1);
+                    handler.sendMessageDelayed(message, 1000);      // send message
+            }
+        }
+    };
 
     private void initDot(int size) {
         dots = new ArrayList<>();
