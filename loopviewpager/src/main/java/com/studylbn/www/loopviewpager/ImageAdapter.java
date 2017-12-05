@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -32,12 +33,6 @@ public class ImageAdapter extends LoopVpAdapter<String> {
         ImageView imageView = new ImageView(mContext);
         imageView.setLayoutParams(layoutParams);
         imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-//        if (p % 2 == 0) {
-//            imageView.setBackgroundColor(Color.GREEN);
-//        } else {
-//            imageView.setBackgroundColor(Color.BLUE);
-//        }
-//        p++;
         Glide.with(mContext).load(data).diskCacheStrategy(DiskCacheStrategy.ALL).into(imageView);
         return imageView;
     }

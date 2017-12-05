@@ -3,14 +3,23 @@ package com.studylbn.www.loopviewpager;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Message;
+import android.os.SystemClock;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+
+import com.studylbn.www.loopviewpager.utils.ABTextUtil;
+import com.studylbn.www.loopviewpager.utils.ToastUtils;
 
 import java.util.ArrayList;
+
+import static android.R.id.message;
 
 /**
  * Created by LiuBin on 2017/12/3 13:53.
@@ -25,7 +34,7 @@ public abstract class LoopVpAdapter<T> extends PagerAdapter implements ViewPager
     private LinearLayout llll;
     private ArrayList<ImageView> dots;
     private int dotnum = 0;
-    private int p = 1;
+    private int clickPosition = 0;
 
     public LoopVpAdapter(Context context, ArrayList<T> datas, ViewPager viewPager, LinearLayout llll) {
         mContext = context;
@@ -50,8 +59,33 @@ public abstract class LoopVpAdapter<T> extends PagerAdapter implements ViewPager
         viewPager.addOnPageChangeListener(this);
         viewPager.setCurrentItem(1, false);
 
+        initEvent(viewPager);
         Message message = handler.obtainMessage(1);     // Message
         handler.sendMessageDelayed(message, 1000);
+    }
+
+    private void initEvent(ViewPager viewPager) {
+        final long[] currentTime = {0};
+        viewPager.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                switch (event.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+                        currentTime[0] = SystemClock.uptimeMillis();
+                        handler.removeCallbacksAndMessages(null);
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        if (SystemClock.uptimeMillis() - currentTime[0] <= 400) {
+                            clickPosition = currentPosition;
+                            ToastUtils.shortshow(mContext, clickPosition + "");
+                        }
+                        Message message = handler.obtainMessage(1);     // Message
+                        handler.sendMessageDelayed(message, 1000);
+                        break;
+                }
+                return false;
+            }
+        });
     }
 
     Handler handler = new Handler() {
@@ -60,14 +94,14 @@ public abstract class LoopVpAdapter<T> extends PagerAdapter implements ViewPager
             super.handleMessage(msg);
             switch (msg.what) {
                 case 1:
-                    p++;
-                    if (p > views.size() - 1) {
-                        p = 2;
+                    currentPosition++;
+                    if (currentPosition > views.size() - 1) {
+                        currentPosition = 2;
                     }
-                    if (p < 0) {
-                        p = views.size() - 3;
+                    if (currentPosition < 0) {
+                        currentPosition = views.size() - 3;
                     }
-                    mViewPager.setCurrentItem(p);
+                    mViewPager.setCurrentItem(currentPosition);
                     Message message = handler.obtainMessage(1);
                     handler.sendMessageDelayed(message, 1000);      // send message
             }
@@ -76,7 +110,7 @@ public abstract class LoopVpAdapter<T> extends PagerAdapter implements ViewPager
 
     private void initDot(int size) {
         dots = new ArrayList<>();
-        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(13, 13);
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ABTextUtil.dip2px(mContext, 10), ABTextUtil.dip2px(mContext, 10));
         layoutParams.setMargins(5, 0, 5, 1);
         for (int i = 0; i < size; i++) {
             ImageView mImageView = new ImageView(mContext);
@@ -141,9 +175,11 @@ public abstract class LoopVpAdapter<T> extends PagerAdapter implements ViewPager
         //        若viewpager滑动未停止，直接返回
         if (state != ViewPager.SCROLL_STATE_IDLE) return;
         if (currentPosition == 0) {
-            mViewPager.setCurrentItem(views.size() - 2, false);
+            currentPosition = views.size() - 2;
+            mViewPager.setCurrentItem(currentPosition, false);
         } else if (currentPosition == views.size() - 1) {
-            mViewPager.setCurrentItem(1, false);
+            currentPosition = 1;
+            mViewPager.setCurrentItem(currentPosition, false);
         }
     }
 
