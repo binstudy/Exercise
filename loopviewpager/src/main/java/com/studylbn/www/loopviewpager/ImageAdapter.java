@@ -19,7 +19,6 @@ import java.util.ArrayList;
 
 public class ImageAdapter extends LoopVpAdapter<String> {
     private ViewGroup.LayoutParams layoutParams;
-    private int p = 0;
 
     public ImageAdapter(Context context, ArrayList<String> datas, ViewPager viewPager, LinearLayout llll) {
         super(context, datas, viewPager, llll);
