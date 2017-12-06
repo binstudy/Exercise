@@ -69,12 +69,6 @@ public abstract class LoopVpAdapter<T> extends PagerAdapter implements ViewPager
         final long[] currentTime = {0};
         final int[] moveXstart = {0};
         final int[] moveXend = {0};
-        viewPager.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ToastUtils.shortshow(mContext, clickPosition + " 777");
-            }
-        });
         viewPager.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
