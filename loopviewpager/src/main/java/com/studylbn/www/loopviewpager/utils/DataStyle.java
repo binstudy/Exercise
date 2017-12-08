@@ -15,14 +15,10 @@ public class DataStyle {
     private static final long ONE_MINUTE = 60000L;
     private static final long ONE_HOUR = 3600000L;
     private static final long ONE_DAY = 86400000L;
-    private static final long ONE_WEEK = 604800000L;
 
-    private static final String ONE_SECOND_AGO = "秒前";
     private static final String ONE_MINUTE_AGO = "分钟前";
     private static final String ONE_HOUR_AGO = "小时前";
     private static final String ONE_DAY_AGO = "天前";
-    private static final String ONE_MONTH_AGO = "月前";
-    private static final String ONE_YEAR_AGO = "年前";
 
     public static String format(Date date) {
         SimpleDateFormat ymd = new SimpleDateFormat("yyyy年MM月dd日");
@@ -43,7 +39,7 @@ public class DataStyle {
         }
         if (delta > ONE_DAY && delta < 7L * ONE_DAY) {
             long days = toDays(delta);
-            return (days <= 0 ? 1 : days) + ONE_HOUR_AGO;
+            return (days <= 0 ? 1 : days) + ONE_DAY_AGO;
         }
         if ((delta > 7L * ONE_DAY) && (date.getYear() == nowYear)) {
             return md.format(date);
