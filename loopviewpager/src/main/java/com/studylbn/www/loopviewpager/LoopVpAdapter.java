@@ -6,20 +6,18 @@ import android.os.Message;
 import android.os.SystemClock;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewConfiguration;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 
 import com.studylbn.www.loopviewpager.utils.ABTextUtil;
 import com.studylbn.www.loopviewpager.utils.ToastUtils;
 
 import java.util.ArrayList;
-
-import static android.R.id.message;
 
 /**
  * Created by LiuBin on 2017/12/3 13:53.
@@ -35,12 +33,15 @@ public abstract class LoopVpAdapter<T> extends PagerAdapter implements ViewPager
     private ArrayList<ImageView> dots;
     private int dotnum = 0;
     private int clickPosition = 0;
+    private int touchSlop = 0;
+
 
     public LoopVpAdapter(Context context, ArrayList<T> datas, ViewPager viewPager, LinearLayout llll) {
         mContext = context;
         views = new ArrayList<>();
         mViewPager = viewPager;
         this.llll = llll;
+        touchSlop = ViewConfiguration.get(mContext).getScaledTouchSlop();
 
         if (datas.size() > 1) {
             datas.add(0, datas.get(datas.size() - 1));
@@ -66,18 +67,24 @@ public abstract class LoopVpAdapter<T> extends PagerAdapter implements ViewPager
 
     private void initEvent(ViewPager viewPager) {
         final long[] currentTime = {0};
+        final int[] moveXstart = {0};
+        final int[] moveXend = {0};
         viewPager.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 switch (event.getAction()) {
                     case MotionEvent.ACTION_DOWN:
+                        moveXstart[0] = (int) event.getX();
                         currentTime[0] = SystemClock.uptimeMillis();
                         handler.removeCallbacksAndMessages(null);
                         break;
                     case MotionEvent.ACTION_UP:
-                        if (SystemClock.uptimeMillis() - currentTime[0] <= 400) {
-                            clickPosition = currentPosition;
-                            ToastUtils.shortshow(mContext, clickPosition + "");
+                        moveXend[0] = (int) event.getX();
+                        if (Math.abs(moveXend[0] - moveXstart[0]) < touchSlop) {
+                            if (SystemClock.uptimeMillis() - currentTime[0] <= 270) {
+                                clickPosition = currentPosition;
+                                ToastUtils.shortshow(mContext, clickPosition + "");
+                            }
                         }
                         Message message = handler.obtainMessage(1);     // Message
                         handler.sendMessageDelayed(message, 1000);
