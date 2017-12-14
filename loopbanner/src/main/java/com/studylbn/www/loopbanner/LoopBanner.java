@@ -2,7 +2,6 @@ package com.studylbn.www.loopbanner;
 
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.os.Handler;
 import android.support.annotation.AttrRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -25,7 +24,6 @@ import android.widget.TextView;
 
 import com.studylbn.www.loopbanner.listener.OnBannerClickListener;
 import com.studylbn.www.loopbanner.listener.OnBannerListener;
-import com.studylbn.www.loopbanner.loader.ImageLoader;
 import com.studylbn.www.loopbanner.loader.ImageLoaderInterface;
 import com.studylbn.www.loopbanner.view.BannerViewPager;
 
@@ -268,9 +266,9 @@ public class LoopBanner extends FrameLayout implements ViewPager.OnPageChangeLis
                 url = imageUrl.get(i - 1);
             }
             imageViews.add(imageView);
-            if (imageLoader != null)
+            if (imageLoader != null) {
                 imageLoader.displayImage(context, url, imageView);
-            else
+            } else
                 Log.e(tag, "Please set images loader.");
         }
 
