@@ -2,9 +2,11 @@ package com.studylbn.www.testloopbanner;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 
 import com.studylbn.www.loopbanner.BannerConfig;
 import com.studylbn.www.loopbanner.LoopBanner;
+import com.studylbn.www.loopbanner.listener.OnBannerListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +15,7 @@ public class MainActivity extends AppCompatActivity {
     LoopBanner banner1, banner2, banner3;
     List<String> urls = new ArrayList<>();
     List<String> titles = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,6 +36,12 @@ public class MainActivity extends AppCompatActivity {
 
         banner1.setImages(urls)
                 .setImageLoader(new GlideImageLoader())
+                .setOnBannerListener(new OnBannerListener() {
+                    @Override
+                    public void onBannerClick(int position) {
+                        Log.e("position", position + "");
+                    }
+                })
                 .start();
 
         banner2.setImages(urls)

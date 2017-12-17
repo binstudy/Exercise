@@ -54,7 +54,7 @@ public class LoopBanner extends FrameLayout implements ViewPager.OnPageChangeLis
     private int titleTextColor;
     private int titleTextSize;
     private int count = 0;
-    private int currentItem;
+    private int currentItem = 0;
     private int gravity = -1;
     private int lastPosition = 1;
     private int scaleType = 1;
@@ -427,12 +427,25 @@ public class LoopBanner extends FrameLayout implements ViewPager.OnPageChangeLis
         if (mOnPageChangeListener != null) {
             mOnPageChangeListener.onPageSelected(toRealPosition(position));
         }
+
+        for (int i = 0; i < count; i++) {
+            //将所有的圆点设置为未选中时候的图片
+            indicatorImages.get(i).setImageResource(mIndicatorUnselectedResId);
+        }
+
         if (bannerStyle == BannerConfig.CIRCLE_INDICATOR ||
                 bannerStyle == BannerConfig.CIRCLE_INDICATOR_TITLE ||
                 bannerStyle == BannerConfig.CIRCLE_INDICATOR_TITLE_INSIDE) {
-            indicatorImages.get((lastPosition - 1 + count) % count).setImageResource(mIndicatorUnselectedResId);
-            indicatorImages.get((position - 1 + count) % count).setImageResource(mIndicatorSelectedResId);
-            lastPosition = position;
+//            indicatorImages.get((lastPosition - 1 + count) % count).setImageResource(mIndicatorUnselectedResId);
+//            indicatorImages.get((position - 1 + count) % count).setImageResource(mIndicatorSelectedResId);
+//            lastPosition = position;
+            if (position == 0) {
+                indicatorImages.get(count - 1).setImageResource(mIndicatorSelectedResId);
+            } else if (position == imageViews.size() - 1) {
+                indicatorImages.get(0).setImageResource(mIndicatorSelectedResId);
+            } else {
+                indicatorImages.get(position - 1).setImageResource(mIndicatorSelectedResId);
+            }
         }
         if (position == 0) position = count;
         if (position > count) position = 1;
@@ -461,29 +474,40 @@ public class LoopBanner extends FrameLayout implements ViewPager.OnPageChangeLis
         if (mOnPageChangeListener != null) {
             mOnPageChangeListener.onPageScrollStateChanged(state);
         }
-        switch (state) {
-            case 0:
-                if (currentItem == 0) {
-                    viewPager.setCurrentItem(count, false);
-                } else if (currentItem == count + 1) {
-                    viewPager.setCurrentItem(1, false);
-                }
-                break;
-            case 1:
-                if (currentItem == count + 1) {
-                    viewPager.setCurrentItem(1, false);
-                } else if (currentItem == 0) {
-                    viewPager.setCurrentItem(count, false);
-                }
-                break;
-            case 2:
-                break;
+//        switch (state) {
+//            case 0:
+//                if (currentItem == 0) {
+//                    viewPager.setCurrentItem(count, false);
+//                } else if (currentItem == count + 1) {
+//                    viewPager.setCurrentItem(1, false);
+//                }
+//                break;
+//            case 1:
+//                if (currentItem == count + 1) {
+//                    viewPager.setCurrentItem(1, false);
+//                } else if (currentItem == 0) {
+//                    viewPager.setCurrentItem(count, false);
+//                }
+//                break;
+//            case 2:
+//                break;
+//        }
+
+        //        若viewpager滑动未停止，直接返回
+        if (state != ViewPager.SCROLL_STATE_IDLE) return;
+        if (currentItem == 0) {
+            currentItem = imageViews.size() - 2;
+            viewPager.setCurrentItem(currentItem, false);
+        } else if (currentItem == imageViews.size() - 1) {
+            currentItem = 1;
+            viewPager.setCurrentItem(currentItem, false);
         }
+
 
     }
 
     private void setData() {
-        currentItem = 1;
+        currentItem = 0;
         if (adapter == null) {
             adapter = new BannerPagerAdapter();
             viewPager.addOnPageChangeListener(this);
@@ -515,14 +539,23 @@ public class LoopBanner extends FrameLayout implements ViewPager.OnPageChangeLis
         @Override
         public void run() {
             if (count > 1 && isAutoPlay) {
-                currentItem = currentItem % (count + 1) + 1;
-                if (currentItem == 1) {
-                    viewPager.setCurrentItem(currentItem, false);
-                    handler.post(task);
-                } else {
-                    viewPager.setCurrentItem(currentItem);
-                    handler.postDelayed(task, delayTime);
+//                currentItem = currentItem % (count + 1) + 1;
+//                if (currentItem == 1) {
+//                    viewPager.setCurrentItem(currentItem, false);
+//                    handler.post(task);
+//                } else {
+//                    viewPager.setCurrentItem(currentItem);
+//                    handler.postDelayed(task, delayTime);
+//                }
+                currentItem++;
+                if (currentItem > imageViews.size() - 1) {
+                    currentItem = 2;
                 }
+                if (currentItem < 0) {
+                    currentItem = imageViews.size() - 3;
+                }
+                viewPager.setCurrentItem(currentItem);
+                handler.postDelayed(task, delayTime);
             }
         }
     };
