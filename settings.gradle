@@ -1,2 +1,2 @@
-include ':app', ':circleprogress', ':testrecyclerview', ':galleryrecyclerview', ':pathtest', ':radarpic', ':bezierview', ':pathmeasure', ':matrixtest', ':messengertest', ':aidltest', ':iconfont', ':testbessel', ':loopviewpager', ':loopbanner', ':testloopbanner'
+include ':app', ':circleprogress', ':testrecyclerview', ':galleryrecyclerview', ':pathtest', ':radarpic', ':bezierview', ':pathmeasure', ':matrixtest', ':messengertest', ':aidltest', ':iconfont', ':testbessel', ':loopviewpager', ':loopbanner', ':testloopbanner', ':servicebestpractice'
 
