@@ -5,7 +5,6 @@ package com.example.servicebestpractice;
  */
 public interface DownloadListener {
 
-
     /**
      * 通知当前的下载进度
      * @param progress
