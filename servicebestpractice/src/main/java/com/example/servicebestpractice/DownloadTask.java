@@ -139,6 +139,7 @@ public class DownloadTask extends AsyncTask<String,Integer,Integer> {
      * 对界面进行相应的更新。
      * @param values
      */
+    @Override
     protected void onProgressUpdate(Integer...values){
         int progress=values[0];
         if(progress>lastProgress){
