@@ -417,7 +417,7 @@ public class LoopBanner extends FrameLayout implements ViewPager.OnPageChangeLis
     @Override
     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
         if (mOnPageChangeListener != null) {
-            mOnPageChangeListener.onPageScrolled(toRealPosition(position), positionOffset, positionOffsetPixels);
+            mOnPageChangeListener.onPageScrolled(position/*toRealPosition(position)*/, positionOffset, positionOffsetPixels);
         }
     }
 
@@ -425,7 +425,7 @@ public class LoopBanner extends FrameLayout implements ViewPager.OnPageChangeLis
     public void onPageSelected(int position) {
         currentItem = position;
         if (mOnPageChangeListener != null) {
-            mOnPageChangeListener.onPageSelected(toRealPosition(position));
+            mOnPageChangeListener.onPageSelected(position/*toRealPosition(position)*/);
         }
 
         for (int i = 0; i < count; i++) {
@@ -574,18 +574,18 @@ public class LoopBanner extends FrameLayout implements ViewPager.OnPageChangeLis
         return super.dispatchTouchEvent(ev);
     }
 
-    /**
-     * 返回真实的位置
-     *
-     * @param position
-     * @return 下标从0开始
-     */
-    public int toRealPosition(int position) {
-        int realPosition = (position - 1) % count;
-        if (realPosition < 0)
-            realPosition += count;
-        return realPosition;
-    }
+//    /**
+//     * 返回真实的位置
+//     *
+//     * @param position
+//     * @return 下标从0开始
+//     */
+//    public int toRealPosition(int position) {
+//        int realPosition = (position - 1) % count;
+//        if (realPosition < 0)
+//            realPosition += count;
+//        return realPosition;
+//    }
 
     class BannerPagerAdapter extends PagerAdapter {
 
